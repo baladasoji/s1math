@@ -69,12 +69,12 @@ Component classes that use `var(--accent)`: `.page-intro`, `.content-section h3`
 
 ## Nav
 
-Every HTML page shares the same nav block (no templating). It includes:
-- A hamburger button (`#nav-toggle`, `.nav-hamburger`) visible only on mobile (`≤768px`)
-- A `<ul>` that gains class `nav-open` when the hamburger is clicked
-- The "Exercises ▾" `<li class="nav-dropdown">` which uses **CSS `:hover`** on desktop and a JS **tap toggle** (`.dropdown-open`) on mobile (`window.innerWidth <= 768`)
+Both sites share the same hamburger-toggle pattern — no templating, so nav changes require editing every HTML file manually.
 
-The mobile nav JS lives in an inline `<script>` before `</body>` in every HTML file. When adding or modifying nav items, update **all 12 HTML files** manually (no include system).
+**Content site nav** (8 files): Dashboard | Numbers | Algebra | Geometry | Set Theory | Competences | Assessment | Resources | Practice Exercises →  
+**Exercise site nav** (5 files): ← Back to Content | 🔢 Numbers | 📐 Algebra | 🎨 Geometry | ⚡ Set Theory
+
+The hamburger button (`#nav-toggle`, `.nav-hamburger`) is visible only on mobile (≤768px). Clicking it toggles `.nav-open` on the `<ul>`. Mobile nav JS is inlined before `</body>` in every HTML file.
 
 ## Exercise page architecture
 
@@ -113,12 +113,31 @@ All four topic pages have been audited and aligned strictly to `syllabus/S1_Math
 - **Geometry**: 3D shapes (views, classification, nets), 2D shapes (triangles/quadrilaterals/regular polygons to decagon/circle), triangle construction (SSS/SAS/SSA/ASA), compass directions, perimeter/area of squares and rectangles only, metric/imperial units, volume of cuboid by counting unit cubes. No transformations, no congruence/similarity proofs, no coordinate geometry.
 - **Set Theory**: sets, ∈/∉/∩/∪/⊂, universal set, empty set, complement, Venn diagrams. No set difference, no Cartesian product, no relations/functions, no logic/proofs.
 
-## Project status
+## Roadmap
+
+### ✅ Phase 1 — Repo split (complete)
+Reorganised `website/` into `website/content/` (curriculum site) and `website/exercises/` (practice site), each independently deployable to its own S3 bucket. Content nav replaced the Exercises dropdown with a single "Practice Exercises →" link. Exercise nav simplified to topic switcher + Back to Content. New `exercises/index.html` topic-selector landing page added.
+
+### ✅ Phase 2 — Card-flip exercise UI (complete)
+Replaced the all-on-one-page worksheet with a mobile-first card-flip engine (`exercises/js/worksheet-engine.js`). One question per screen, sticky progress header (Q n of N + fill bar), sticky bottom Prev/Next nav bar, inline feedback, summary screen on completion. Engine API: `init(questions, topicSlug)`.
+
+### ⬜ Phase 3 — AWS infrastructure (not started)
+Create DynamoDB table `s1math-questions` (PK: `topic`, SK: `questionId`), Python Lambda function, and HTTP API Gateway route `GET /questions/{topic}`. Deploy content site to S3 bucket A, exercises site to S3 bucket B. No auth required — read-only public API.
+
+### ⬜ Phase 4 — Question migration (not started)
+One-time migration script (`api/migrate_questions.py`) that strips the `const WS_QUESTIONS =` wrapper from each `data/questions-*.js` file and batch-writes all 401 questions to DynamoDB.
+
+### ⬜ Phase 5 — Wire exercises to API (not started)
+Update `worksheet-engine.js` to fetch questions from API Gateway (`GET /questions/{topic}`) with a fallback to the local `WS_QUESTIONS` global if the API is unavailable. Remove `<script src="data/questions-*.js">` tags once the API is confirmed live.
+
+---
+
+## Content status
 
 All S1 topic pages (`numbers.html`, `algebra.html`, `geometry.html`, `set-theory.html`) are complete and syllabus-aligned.
 
 `exercises-numbers.html` is complete: 100 questions (80 MCQ, 20 fill-in) across 6 parts — Natural Numbers & Integers (18), Integers & Number Line (14), Fractions & Decimals (18), Operations & BODMAS (14), Primes/Factors/Divisibility (20), Real-World Applications (16).
 
-`exercises-algebra.html`, `exercises-geometry.html`, and `exercises-set-theory.html` are stubs (Coming Soon) — each needs ~50 questions following the exercise page pattern above, scoped strictly to the S1 syllabus boundaries listed above.
+`exercises-algebra.html`, `exercises-geometry.html`, and `exercises-set-theory.html` are stubs — each needs ~100 questions following the exercise page pattern above, scoped strictly to the S1 syllabus boundaries listed above.
 
 S2 and S3 syllabi are available in `syllabus/` for future expansion.
