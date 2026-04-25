@@ -49,10 +49,9 @@
         <p>&copy; 2026 S1 Mathematics Curriculum. All rights reserved.</p>
         <p>Designed for educational purposes.</p>
     </footer>
-    <script src="data/questions-algebra.js"></script>
     <script src="js/worksheet-engine.js"></script>
     <script>
-    document.addEventListener('DOMContentLoaded', () => init(WS_QUESTIONS, 'algebra'));
+    document.addEventListener('DOMContentLoaded', () => loadAndInit('algebra'));
     document.getElementById('nav-toggle').addEventListener('click', function() {
         this.nextElementSibling.classList.toggle('nav-open');
     });

@@ -121,13 +121,13 @@ Reorganised `website/` into `website/content/` (curriculum site) and `website/ex
 ### ✅ Phase 2 — Card-flip exercise UI (complete)
 Replaced the all-on-one-page worksheet with a mobile-first card-flip engine (`exercises/js/worksheet-engine.js`). One question per screen, sticky progress header (Q n of N + fill bar), sticky bottom Prev/Next nav bar, inline feedback, summary screen on completion. Engine API: `init(questions, topicSlug)`.
 
-### ⬜ Phase 3 — AWS infrastructure (not started)
+### ✅ Phase 3 — AWS infrastructure (complete)
 Create DynamoDB table `s1math-questions` (PK: `topic`, SK: `questionId`), Python Lambda function, and HTTP API Gateway route `GET /questions/{topic}`. Deploy content site to S3 bucket A, exercises site to S3 bucket B. No auth required — read-only public API.
 
-### ⬜ Phase 4 — Question migration (not started)
+### ✅ Phase 4 — Question migration (complete)
 One-time migration script (`api/migrate_questions.py`) that strips the `const WS_QUESTIONS =` wrapper from each `data/questions-*.js` file and batch-writes all 401 questions to DynamoDB.
 
-### ⬜ Phase 5 — Wire exercises to API (not started)
+### ✅ Phase 5 — Wire exercises to API (complete)
 Update `worksheet-engine.js` to fetch questions from API Gateway (`GET /questions/{topic}`) with a fallback to the local `WS_QUESTIONS` global if the API is unavailable. Remove `<script src="data/questions-*.js">` tags once the API is confirmed live.
 
 ---

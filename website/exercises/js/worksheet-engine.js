@@ -1,6 +1,37 @@
 /* ── Card-Flip Worksheet Engine ─────────────────────────────────────────────
-   Call init(questionsArray, topicSlug) from the page's DOMContentLoaded handler.
+   Call loadAndInit(topicSlug) from the page's DOMContentLoaded handler.
+   Questions are fetched from the API; falls back to local WS_QUESTIONS if offline.
    ─────────────────────────────────────────────────────────────────────────── */
+
+const API_BASE = 'https://9kzpj7v8g6.execute-api.eu-north-1.amazonaws.com/prod';
+
+async function loadAndInit(topicSlug) {
+    showLoading();
+    try {
+        const res = await fetch(`${API_BASE}/questions/${topicSlug}`);
+        if (!res.ok) throw new Error(`API returned ${res.status}`);
+        const questions = await res.json();
+        init(questions, topicSlug);
+    } catch (err) {
+        console.warn('API unavailable, falling back to local data:', err.message);
+        if (typeof WS_QUESTIONS !== 'undefined' && WS_QUESTIONS.length) {
+            init(WS_QUESTIONS, topicSlug);
+        } else {
+            showError();
+        }
+    }
+}
+
+function showLoading() {
+    document.getElementById('ws-card').innerHTML =
+        '<div class="ws-card ws-loading"><p>Loading questions…</p></div>';
+}
+
+function showError() {
+    document.getElementById('ws-card').innerHTML =
+        '<div class="ws-card ws-summary"><h3>⚠️ Could not load questions</h3>'
+      + '<p>Check your connection and reload the page.</p></div>';
+}
 
 const wsState = {
     questions:    [],

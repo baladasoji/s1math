@@ -4,7 +4,7 @@ Description: S1 Mathematics — Questions API (DynamoDB + Lambda + HTTP API Gate
 
 Globals:
   Function:
-    Runtime: python3.12
+    Runtime: python3.13
     Timeout: 10
     Environment:
       Variables:
@@ -82,8 +82,11 @@ Resources:
           - "*"
         AllowMethods:
           - GET
+          - OPTIONS
         AllowHeaders:
           - Content-Type
+          - Authorization
+        MaxAge: 86400        # cache preflight for 24 h
 
 Outputs:
   ApiEndpoint:

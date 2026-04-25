@@ -1098,6 +1098,15 @@ code {
     cursor: default;
 }
 
+.ws-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #5a6a7a;
+    font-size: 1.1rem;
+    min-height: 320px;
+}
+
 .ws-option-key {
     display: inline-block;
     width: 1.4rem;
