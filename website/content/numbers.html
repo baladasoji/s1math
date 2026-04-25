@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Numbers - S1 Mathematics</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>:root { --accent: #ff6b6b; --accent-subtle: #fff5f5; --accent-subtle-2: #ffe8e8; --accent-border-light: #ff9999; --accent-bg: #f9f9f9; }</style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>🔢 Numbers</h1>
+            <p>Understanding Number Systems and Properties</p>
+        </div>
+    </header>
+
+    <nav>
+        <button class="nav-hamburger" aria-label="Toggle menu" id="nav-toggle">&#9776;</button>
+        <ul>
+            <li><a href="index.html">Dashboard</a></li>
+            <li><a href="numbers.html">Numbers</a></li>
+            <li><a href="algebra.html">Algebra</a></li>
+            <li><a href="geometry.html">Geometry</a></li>
+            <li><a href="set-theory.html">Set Theory</a></li>
+            <li><a href="learning-objectives.html">Competences</a></li>
+            <li><a href="assessment.html">Assessment</a></li>
+            <li><a href="resources.html">Resources</a></li>
+            <li><a href="../exercises/index.html" class="nav-practice-link">Practice Exercises →</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <div class="container">
+            <div class="page-intro">
+                <h2>Numbers: The Foundation of Mathematics</h2>
+                <p>This topic covers the classification and properties of different number systems, from natural numbers to real numbers. Students will develop deep understanding of number operations, relationships, and practical applications.</p>
+            </div>
+
+            <div class="content-section">
+                <h3>Key Concepts</h3>
+
+                <h4>1. Natural Numbers (ℕ)</h4>
+                <div class="subsection">
+                    <h5>What are they?</h5>
+                    <p>The counting numbers: 1, 2, 3, 4, … used for counting discrete objects. Natural numbers are always positive — zero and negatives are excluded.</p>
+                </div>
+
+                <h4>2. Integers (ℤ)</h4>
+                <p>Include positive numbers, negative numbers, and zero: ..., -3, -2, -1, 0, 1, 2, 3, ...</p>
+                <div class="example-box">
+                    <strong>Examples:</strong> Temperature changes (-5°C), debt (-$50), elevation (1200m)
+                </div>
+
+                <h4>3. The Number Line, Ordering and Absolute Value</h4>
+                <div class="subsection">
+                    <h5>Plotting Points on a Number Line</h5>
+                    <p>Integers can be placed on a number line. Numbers increase from left to right.</p>
+                    <p style="font-family:monospace; letter-spacing:2px; text-align:center; padding:0.5rem 0;">
+                        ←── −5 &nbsp; −4 &nbsp; −3 &nbsp; −2 &nbsp; −1 &nbsp; 0 &nbsp; 1 &nbsp; 2 &nbsp; 3 &nbsp; 4 &nbsp; 5 ──→
+                    </p>
+                </div>
+                <div class="subsection">
+                    <h5>Plotting Points on a Coordinate Plane</h5>
+                    <p>A point is written as <strong>(x, y)</strong> where both coordinates are integers. The x-axis is horizontal and the y-axis is vertical. For example, (3, −2) is 3 right and 2 down from the origin (0, 0).</p>
+                </div>
+                <div class="subsection">
+                    <h5>Comparing and Ordering Integers</h5>
+                    <p>On the number line, the number further to the <strong>right is greater</strong>. So −1 &gt; −4, and 0 &gt; −5.</p>
+                    <p>The <strong>transitivity property</strong> of &gt; and &lt;: if a &gt; b and b &gt; c, then a &gt; c.
+                    <br>Example: since 3 &gt; 1 and 1 &gt; −2, we know 3 &gt; −2.</p>
+                </div>
+                <div class="subsection">
+                    <h5>Absolute Value</h5>
+                    <p>The absolute value of a number is its <strong>distance from 0</strong> on the number line — always non-negative.</p>
+                    <p>Notation: |−3| = 3 &nbsp;&nbsp; |5| = 5 &nbsp;&nbsp; |0| = 0</p>
+                </div>
+                <div class="example-box">
+                    <strong>Examples:</strong> |−7| = 7 &nbsp;|&nbsp; |4| = 4 &nbsp;|&nbsp; Since −8 is further from 0 than 3, |−8| &gt; |3|
+                </div>
+
+                <h4>4. Fractions</h4>
+                <p>A fraction is a ratio of two integers p/q where q ≠ 0. Different fractions can be equivalent (e.g. 1/2 = 2/4 = 4/8).</p>
+                <div class="grid-2">
+                    <div class="grid-item">
+                        <h5>Fractions</h5>
+                        <p>Parts of a whole: 1/2, 3/4, 5/8</p>
+                    </div>
+                    <div class="grid-item">
+                        <h5>Terminating Decimals</h5>
+                        <p>Fractions that convert exactly: 3/4 = 0.75, 1/5 = 0.2</p>
+                    </div>
+                    <div class="grid-item">
+                        <h5>Simplifying Fractions</h5>
+                        <p>Divide top and bottom by their HCF: 12/18 = 2/3</p>
+                    </div>
+                    <div class="grid-item">
+                        <h5>Mixed Numbers</h5>
+                        <p>Whole + fraction: 2 3/4 = 11/4</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-section">
+                <h3>Properties of Numbers</h3>
+
+                <h4>Order of Operations (BODMAS)</h4>
+                <p>When a calculation has several operations, always apply them in this order:</p>
+                <ol>
+                    <li><strong>B</strong>rackets — evaluate inside brackets first</li>
+                    <li><strong>O</strong>rders — powers and roots</li>
+                    <li><strong>D</strong>ivision and <strong>M</strong>ultiplication — left to right</li>
+                    <li><strong>A</strong>ddition and <strong>S</strong>ubtraction — left to right</li>
+                </ol>
+                <div class="example-box">
+                    <strong>Example:</strong> 3 + 4 × 2 = 3 + 8 = <strong>11</strong> (not 14)<br>
+                    <strong>Example:</strong> (3 + 4) × 2 = 7 × 2 = <strong>14</strong> (brackets change the result)
+                </div>
+
+                <h4>Integer and Decimal Arithmetic</h4>
+                <div class="grid-2">
+                    <div class="grid-item">
+                        <h5>Adding Integers</h5>
+                        <p>−3 + 5 = 2 &nbsp;&nbsp; −4 + (−2) = −6<br>Think of movement on the number line.</p>
+                    </div>
+                    <div class="grid-item">
+                        <h5>Subtracting Integers</h5>
+                        <p>5 − (−3) = 5 + 3 = 8<br>Subtracting a negative = adding a positive.</p>
+                    </div>
+                    <div class="grid-item">
+                        <h5>Multiplying Integers</h5>
+                        <p>(+) × (−) = − &nbsp;&nbsp; (−) × (−) = +<br>−3 × 4 = −12 &nbsp;&nbsp; −3 × −4 = 12</p>
+                    </div>
+                    <div class="grid-item">
+                        <h5>Importance of 0 and 1</h5>
+                        <p>a + 0 = a (additive identity)<br>a × 1 = a (multiplicative identity)</p>
+                    </div>
+                </div>
+
+                <h4>Properties of Arithmetic</h4>
+                <div class="grid-2">
+                    <div class="grid-item">
+                        <h5>Commutative Property</h5>
+                        <p>a + b = b + a<br>a × b = b × a</p>
+                    </div>
+                    <div class="grid-item">
+                        <h5>Associative Property</h5>
+                        <p>(a + b) + c = a + (b + c)<br>(a × b) × c = a × (b × c)</p>
+                    </div>
+                    <div class="grid-item">
+                        <h5>Distributive Property</h5>
+                        <p>a(b + c) = ab + ac</p>
+                    </div>
+                    <div class="grid-item">
+                        <h5>Identity Property</h5>
+                        <p>a + 0 = a<br>a × 1 = a</p>
+                    </div>
+                </div>
+
+                <h4>Divisibility Rules</h4>
+                <p>A number is divisible by…</p>
+                <ul>
+                    <li><strong>2</strong> — if its last digit is even (0, 2, 4, 6, or 8). Example: 48 ✓, 37 ✗</li>
+                    <li><strong>3</strong> — if the sum of its digits is divisible by 3. Example: 123 → 1+2+3=6 ✓</li>
+                    <li><strong>5</strong> — if its last digit is 0 or 5. Example: 35 ✓, 75 ✓, 42 ✗</li>
+                    <li><strong>10</strong> — if its last digit is 0. Example: 150 ✓, 85 ✗</li>
+                </ul>
+
+                <h4>Prime Numbers and Factorisation</h4>
+                <ul>
+                    <li><strong>Prime Numbers:</strong> Numbers divisible only by 1 and themselves (2, 3, 5, 7, 11, ...)</li>
+                    <li><strong>Composite Numbers:</strong> Numbers with more than two factors</li>
+                    <li><strong>Factors and Multiples:</strong> If a divides b, then a is a factor and b is a multiple</li>
+                    <li><strong>Prime Factorisation:</strong> Every natural number can be written as a product of primes (e.g., 12 = 2² × 3)</li>
+                    <li><strong>HCF and LCM:</strong> Highest Common Factor and Lowest Common Multiple, found using prime factorisations</li>
+                </ul>
+
+            </div>
+
+            <div class="content-section">
+                <h3>Real-World Contexts</h3>
+
+                <div class="context-box">
+                    <h5>Financial Mathematics</h5>
+                    <p>Using ratios and percentages for calculating interest, discounts, tax, profit and loss. Understanding the decimal nature of currency conversions.</p>
+                </div>
+
+                <div class="context-box">
+                    <h5>Measurement and Scaling</h5>
+                    <p>Converting between units, creating scale models, understanding proportional relationships in recipes, maps, and engineering diagrams.</p>
+                </div>
+
+            </div>
+
+            <div class="content-section">
+                <h3>Essential Questions</h3>
+                <ul>
+                    <li>What is the difference between natural numbers and integers?</li>
+                    <li>How do negative numbers arise in real life (debt, temperature, depth)?</li>
+                    <li>How does absolute value describe distance on the number line?</li>
+                    <li>How are fractions and terminating decimals related?</li>
+                    <li>Why does the order of operations matter when calculating?</li>
+                    <li>How can prime factorisation help us find HCF and LCM?</li>
+                </ul>
+            </div>
+
+            <div class="content-section">
+                <h3>Key Skills to Develop</h3>
+                <ul>
+                    <li>Distinguish between natural numbers and integers; plot both on a number line</li>
+                    <li>Calculate and interpret absolute values</li>
+                    <li>Compare and order integers using &gt;, &lt; and transitivity</li>
+                    <li>Plot integer coordinate points on a plane</li>
+                    <li>Add, subtract, multiply and divide integers and decimals</li>
+                    <li>Apply order of operations (BODMAS) including brackets</li>
+                    <li>Simplify fractions and convert between fractions and terminating decimals</li>
+                    <li>Apply divisibility rules for 2, 3, 5 and 10</li>
+                    <li>Find HCF and LCM using prime factorisation</li>
+                </ul>
+            </div>
+
+            <div class="content-section" style="text-align:center; background: linear-gradient(135deg, #fff5f5 0%, #ffe8e8 100%);">
+                <h3 style="color:#ff6b6b;">Ready to practise?</h3>
+                <p style="color:#5a6c7d; margin-bottom:1.5rem;">Test your knowledge with 50 interactive questions covering all Numbers topics.</p>
+                <a href="../exercises/exercises-numbers.html" style="display:inline-block; padding:0.85rem 2rem; background:#ff6b6b; color:white; border-radius:8px; text-decoration:none; font-weight:600; font-size:1rem; transition:opacity 0.2s;" onmouseover="this.style.opacity=0.85" onmouseout="this.style.opacity=1">
+                    Go to Numbers Exercises →
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 S1 Mathematics Curriculum. All rights reserved.</p>
+        <p>Designed for educational purposes.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+            const navLinks = document.querySelectorAll('nav a');
+            navLinks.forEach(link => {
+                if (link.getAttribute('href') === currentPage) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+        });
+    </script>
+
+    <script>
+    // Mobile nav toggle
+    document.getElementById('nav-toggle').addEventListener('click', function() {
+        var ul = this.nextElementSibling;
+        ul.classList.toggle('nav-open');
+    });
+    // Mobile dropdown toggle (tap instead of hover)
+    document.querySelectorAll('.nav-dropdown-toggle').forEach(function(toggle) {
+        toggle.addEventListener('click', function(e) {
+            if (window.innerWidth <= 768) {
+                e.preventDefault();
+                this.closest('.nav-dropdown').classList.toggle('dropdown-open');
+            }
+        });
+    });
+    </script>
+</body>
+</html>

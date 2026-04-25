@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice Exercises - S1 Mathematics</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>✏️ S1 Mathematics — Practice</h1>
+            <p>Interactive exercises for all four S1 topics</p>
+        </div>
+    </header>
+
+    <nav>
+        <button class="nav-hamburger" aria-label="Toggle menu" id="nav-toggle">&#9776;</button>
+        <ul>
+            <li><a href="../content/index.html">← Back to Content</a></li>
+            <li><a href="exercises-numbers.html">🔢 Numbers</a></li>
+            <li><a href="exercises-algebra.html">📐 Algebra</a></li>
+            <li><a href="exercises-geometry.html">🎨 Geometry</a></li>
+            <li><a href="exercises-set-theory.html">⚡ Set Theory</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <div class="container">
+            <div class="dashboard-hero">
+                <h2>Choose a Topic to Practise</h2>
+                <p>Each set has 100 questions with instant feedback. Work through them at your own pace — one question at a time.</p>
+            </div>
+
+            <div class="topics-grid">
+                <div class="topic-card">
+                    <div class="icon">🔢</div>
+                    <h3>Numbers</h3>
+                    <p>Natural numbers, integers, fractions, decimals, BODMAS, primes, HCF &amp; LCM.</p>
+                    <a href="exercises-numbers.html">Start Numbers →</a>
+                </div>
+
+                <div class="topic-card">
+                    <div class="icon">📐</div>
+                    <h3>Algebra</h3>
+                    <p>Sequences, nth term, tables of values, simplifying expressions, linear equations.</p>
+                    <a href="exercises-algebra.html">Start Algebra →</a>
+                </div>
+
+                <div class="topic-card">
+                    <div class="icon">🎨</div>
+                    <h3>Geometry</h3>
+                    <p>3D shapes, nets, 2D shapes, triangle construction, perimeter, area and volume.</p>
+                    <a href="exercises-geometry.html">Start Geometry →</a>
+                </div>
+
+                <div class="topic-card">
+                    <div class="icon">⚡</div>
+                    <h3>Set Theory</h3>
+                    <p>Sets, membership, union, intersection, complement and Venn diagrams.</p>
+                    <a href="exercises-set-theory.html">Start Set Theory →</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 S1 Mathematics Curriculum. All rights reserved.</p>
+        <p>Designed for educational purposes.</p>
+    </footer>
+
+    <script>
+    document.getElementById('nav-toggle').addEventListener('click', function() {
+        this.nextElementSibling.classList.toggle('nav-open');
+    });
+    </script>
+</body>
+</html>

@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Set Theory - S1 Mathematics</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>:root { --accent: #43e97b; --accent-subtle: #f0fff6; --accent-subtle-2: #e0ffe8; --accent-border-light: #8fffc0; --accent-bg: #f5fff9; }</style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>⚡ Set Theory</h1>
+            <p>Logical Structure and Mathematical Relationships</p>
+        </div>
+    </header>
+
+    <nav>
+        <button class="nav-hamburger" aria-label="Toggle menu" id="nav-toggle">&#9776;</button>
+        <ul>
+            <li><a href="index.html">Dashboard</a></li>
+            <li><a href="numbers.html">Numbers</a></li>
+            <li><a href="algebra.html">Algebra</a></li>
+            <li><a href="geometry.html">Geometry</a></li>
+            <li><a href="set-theory.html">Set Theory</a></li>
+            <li><a href="learning-objectives.html">Competences</a></li>
+            <li><a href="assessment.html">Assessment</a></li>
+            <li><a href="resources.html">Resources</a></li>
+            <li><a href="../exercises/index.html" class="nav-practice-link">Practice Exercises →</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <div class="container">
+            <div class="page-intro">
+                <h2>Set Theory: Collections, Symbols, and Venn Diagrams</h2>
+                <p>Set theory gives us a precise way to group and compare objects. In S1 you will learn how to describe sets, use the symbols ∈, ∉, ∩, ∪ and ⊂, and draw Venn diagrams to show how sets relate to each other.</p>
+            </div>
+
+            <div class="content-section">
+                <h3>What is a Set?</h3>
+
+                <p>A <strong>set</strong> is a well-defined collection of distinct objects. "Well-defined" means there is no ambiguity about whether something belongs to the collection. The objects in a set are called its <strong>elements</strong> or <strong>members</strong>.</p>
+
+                <p>Sets are named with capital letters. The elements are listed inside curly braces, separated by commas.</p>
+
+                <div class="example-box">
+                    <strong>Examples:</strong>
+                    <ul style="margin-top: 0.5rem; margin-left: 1.5rem;">
+                        <li>A = {1, 2, 3, 4, 5} — the set of the first five natural numbers</li>
+                        <li>B = {red, blue, green} — the set of primary light colours</li>
+                        <li>C = {Monday, Wednesday, Friday} — the set of school PE days</li>
+                        <li>D = {2, 4, 6, 8, 10} — the set of even numbers from 1 to 10</li>
+                    </ul>
+                </div>
+
+                <p>Each element appears only once in a set. The order of listing does not matter: {1, 2, 3} and {3, 1, 2} describe the same set.</p>
+            </div>
+
+            <div class="content-section">
+                <h3>Element Membership: ∈ and ∉</h3>
+
+                <p>The symbol <strong>∈</strong> means "is an element of". The symbol <strong>∉</strong> means "is not an element of".</p>
+
+                <div class="example-box">
+                    <strong>Examples with A = {1, 2, 3, 4, 5}:</strong>
+                    <ul style="margin-top: 0.5rem; margin-left: 1.5rem;">
+                        <li>3 ∈ A — 3 is an element of A (true)</li>
+                        <li>7 ∉ A — 7 is not an element of A (true)</li>
+                        <li>1 ∈ A — 1 is an element of A (true)</li>
+                        <li>6 ∉ A — 6 is not an element of A (true)</li>
+                    </ul>
+                </div>
+
+                <div class="example-box">
+                    <strong>Examples with B = {red, blue, green}:</strong>
+                    <ul style="margin-top: 0.5rem; margin-left: 1.5rem;">
+                        <li>blue ∈ B — blue is an element of B (true)</li>
+                        <li>yellow ∉ B — yellow is not an element of B (true)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="content-section">
+                <h3>Special Sets</h3>
+
+                <div class="grid-2">
+                    <div class="grid-item">
+                        <h5>Universal Set (U or ξ)</h5>
+                        <p>The universal set contains all elements being considered in a particular problem. It is written as <strong>U</strong> or <strong>ξ</strong> (the Greek letter xi). Every other set in the problem is a subset of the universal set.</p>
+                        <p style="margin-top: 0.5rem;"><strong>Example:</strong> If we are working with single-digit positive integers, then U = {1, 2, 3, 4, 5, 6, 7, 8, 9}.</p>
+                    </div>
+                    <div class="grid-item">
+                        <h5>Empty Set (∅)</h5>
+                        <p>The empty set is the set with no elements at all. It is written as <strong>∅</strong> or as empty braces { }.</p>
+                        <p style="margin-top: 0.5rem;"><strong>Example:</strong> The set of months with fewer than 28 days is ∅ — no such month exists.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-section">
+                <h3>Subsets: The Symbol ⊂</h3>
+
+                <p>Set A is a <strong>subset</strong> of set B, written <strong>A ⊂ B</strong>, if every element of A is also an element of B.</p>
+
+                <div class="example-box">
+                    <strong>Example:</strong><br>
+                    Let B = {1, 2, 3, 4, 5, 6} and A = {2, 4, 6}.<br>
+                    Every element of A (2, 4, and 6) is also in B, so A ⊂ B.
+                </div>
+
+                <div class="example-box">
+                    <strong>Another example:</strong><br>
+                    Let U = {all students in the class}, and let F = {students who play football}.<br>
+                    Since every football player is a student, F ⊂ U.
+                </div>
+
+                <p>The empty set is a subset of every set: ∅ ⊂ A for any set A. Every set is also a subset of itself: A ⊂ A.</p>
+            </div>
+
+            <div class="content-section">
+                <h3>Set Operations</h3>
+
+                <h4>Union (∪)</h4>
+                <p>The <strong>union</strong> of sets A and B, written <strong>A ∪ B</strong>, contains all elements that are in A, or in B, or in both. On a Venn diagram, the union is the entire shaded area of both circles combined.</p>
+
+                <div class="example-box">
+                    <strong>Example:</strong><br>
+                    A = {1, 2, 3} and B = {3, 4, 5}<br>
+                    A ∪ B = {1, 2, 3, 4, 5}<br>
+                    (The element 3 appears in both sets but is listed only once in the union.)
+                </div>
+
+                <h4>Intersection (∩)</h4>
+                <p>The <strong>intersection</strong> of sets A and B, written <strong>A ∩ B</strong>, contains only the elements that are in both A and B at the same time. On a Venn diagram, the intersection is the overlapping region in the middle where the two circles meet.</p>
+
+                <div class="example-box">
+                    <strong>Example:</strong><br>
+                    A = {1, 2, 3, 4} and B = {3, 4, 5, 6}<br>
+                    A ∩ B = {3, 4}<br>
+                    (Only 3 and 4 appear in both sets.)
+                </div>
+
+                <p>If A ∩ B = ∅, the sets have no elements in common and are called <strong>disjoint sets</strong>.</p>
+
+                <h4>Complement (A')</h4>
+                <p>The <strong>complement</strong> of set A, written <strong>A'</strong>, contains all elements of the universal set that are not in A. On a Venn diagram, the complement is everything inside the rectangle but outside the circle for A.</p>
+
+                <div class="example-box">
+                    <strong>Example:</strong><br>
+                    U = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10} and A = {1, 3, 5, 7, 9}<br>
+                    A' = {2, 4, 6, 8, 10}<br>
+                    (The even numbers are everything in U that is not in A.)
+                </div>
+            </div>
+
+            <div class="content-section">
+                <h3>Venn Diagrams</h3>
+
+                <p>A <strong>Venn diagram</strong> is a picture that shows the relationships between sets. The rules are simple:</p>
+                <ul style="margin: 0.75rem 0 0.75rem 1.5rem;">
+                    <li>Draw a rectangle to represent the universal set U.</li>
+                    <li>Draw a circle inside the rectangle for each set. Label each circle.</li>
+                    <li>If two sets share elements, the circles <strong>overlap</strong>. The overlapping region holds the elements in both sets (the intersection).</li>
+                    <li>Elements that belong to neither set are placed inside the rectangle but outside all circles.</li>
+                </ul>
+
+                <div class="subsection">
+                    <h5>Reading a Venn Diagram</h5>
+                    <ul style="margin-top: 0.5rem; margin-left: 1.5rem;">
+                        <li>Elements in the left part of circle A only — belong to A but not B.</li>
+                        <li>Elements in the overlapping (middle) region — belong to both A and B (the intersection A ∩ B).</li>
+                        <li>Elements in the right part of circle B only — belong to B but not A.</li>
+                        <li>Elements outside both circles but inside the rectangle — belong to neither A nor B; they are in A' ∩ B'.</li>
+                    </ul>
+                </div>
+
+                <div class="example-box">
+                    <strong>Worked Example 1:</strong><br>
+                    U = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, A = {2, 4, 6, 8}, B = {4, 6, 8, 10}<br><br>
+                    First, find the intersection: A ∩ B = {4, 6, 8}<br>
+                    Elements only in A (not in B): {2}<br>
+                    Elements only in B (not in A): {10}<br>
+                    Elements in neither: {1, 3, 5, 7, 9}<br><br>
+<pre style="font-family: monospace; font-size: 0.9rem; line-height: 1.5; background: none; border: none; padding: 0; margin: 0;">
+  U = {1..10}
+  +------------------------------------+
+  |        A           B               |
+  |   +---------+  +---------+         |
+  |   |         |  |         |         |
+  |   |   {2}   | {4,6,8}|  {10}  |   |
+  |   |         |  |         |         |
+  |   +---------+  +---------+         |
+  |                                    |
+  |    Outside both: {1, 3, 5, 7, 9}  |
+  +------------------------------------+
+</pre>
+                </div>
+
+                <div class="example-box">
+                    <strong>Worked Example 2: Multiples of 2 and multiples of 3 up to 20</strong><br>
+                    U = {1, 2, 3, ..., 20}<br>
+                    M2 = multiples of 2 up to 20 = {2, 4, 6, 8, 10, 12, 14, 16, 18, 20}<br>
+                    M3 = multiples of 3 up to 20 = {3, 6, 9, 12, 15, 18}<br><br>
+                    Intersection M2 ∩ M3 = multiples of both 2 and 3 = multiples of 6 = {6, 12, 18}<br>
+                    Only in M2: {2, 4, 8, 10, 14, 16, 20}<br>
+                    Only in M3: {3, 9, 15}<br>
+                    In neither: {1, 5, 7, 11, 13, 17, 19}<br><br>
+                    The intersection always contains multiples of 6 because a number that is a multiple of both 2 and 3 must be a multiple of 6.
+                </div>
+
+                <p>Venn diagrams are a powerful tool for solving counting and classification problems. Once you have placed every element in the correct region, you can quickly answer questions such as "How many students play at least one sport?" (union) or "How many students play both sports?" (intersection).</p>
+            </div>
+
+            <div class="content-section">
+                <h3>Real-World Applications</h3>
+
+                <div class="context-box">
+                    <h5>Classifying Students by Activity</h5>
+                    <p>Let F = {students who play football} and T = {students who play tennis}. Then F ∪ T is all students who play at least one of the two sports, while F ∩ T is the group who plays both. A Venn diagram makes it easy to count how many students fall into each group.</p>
+                </div>
+
+                <div class="context-box">
+                    <h5>Even Numbers and Multiples of 3</h5>
+                    <p>Within the universal set U = {1, 2, ..., 20}, let E = {even numbers} and T = {multiples of 3}. The intersection E ∩ T = {6, 12, 18} consists of multiples of 6. The complement E' gives the odd numbers. Drawing this as a Venn diagram shows immediately which numbers belong to both groups.</p>
+                </div>
+
+                <div class="context-box">
+                    <h5>Everyday Sorting with Venn Diagrams</h5>
+                    <p>Suppose a class surveys which students have a pet dog and which have a pet cat. Placing names in a Venn diagram instantly shows who has only a dog, who has only a cat, who has both, and who has neither. This kind of visual classification is used in biology, geography, and many other subjects.</p>
+                </div>
+            </div>
+
+            <div class="content-section">
+                <h3>Essential Questions</h3>
+                <ul>
+                    <li>What makes a collection of objects a well-defined set?</li>
+                    <li>How do the symbols ∈ and ∉ help us describe membership precisely?</li>
+                    <li>What is the difference between the union and the intersection of two sets?</li>
+                    <li>Why do we need a universal set when we talk about complements?</li>
+                    <li>How does a Venn diagram help us see relationships between sets?</li>
+                    <li>When is the intersection of two sets the empty set?</li>
+                </ul>
+            </div>
+
+            <div class="content-section">
+                <h3>Key Skills to Develop</h3>
+                <ul>
+                    <li>Write sets using roster (list) notation and identify their elements</li>
+                    <li>Use the symbols ∈, ∉, ∩, ∪ and ⊂ correctly in statements and calculations</li>
+                    <li>Identify the universal set, empty set, and complements in a given problem</li>
+                    <li>Determine whether one set is a subset of another</li>
+                    <li>Find the union and intersection of two or more sets</li>
+                    <li>Find the complement of a set given a universal set</li>
+                    <li>Draw a Venn diagram with two sets and correctly place all elements</li>
+                    <li>Read a Venn diagram to identify unions, intersections, and complements</li>
+                    <li>Use a Venn diagram to solve counting and classification problems</li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 S1 Mathematics Curriculum. All rights reserved.</p>
+        <p>Designed for educational purposes.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+            const navLinks = document.querySelectorAll('nav a');
+            navLinks.forEach(link => {
+                if (link.getAttribute('href') === currentPage) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+        });
+    </script>
+
+    <script>
+    // Mobile nav toggle
+    document.getElementById('nav-toggle').addEventListener('click', function() {
+        var ul = this.nextElementSibling;
+        ul.classList.toggle('nav-open');
+    });
+    // Mobile dropdown toggle (tap instead of hover)
+    document.querySelectorAll('.nav-dropdown-toggle').forEach(function(toggle) {
+        toggle.addEventListener('click', function(e) {
+            if (window.innerWidth <= 768) {
+                e.preventDefault();
+                this.closest('.nav-dropdown').classList.toggle('dropdown-open');
+            }
+        });
+    });
+    </script>
+</body>
+</html>
