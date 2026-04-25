@@ -23,11 +23,36 @@ Resources:
           AttributeType: S
         - AttributeName: questionId
           AttributeType: S
+        - AttributeName: grade
+          AttributeType: S
+        - AttributeName: subtopic
+          AttributeType: S
+        - AttributeName: difficulty
+          AttributeType: S
       KeySchema:
         - AttributeName: topic
           KeyType: HASH
         - AttributeName: questionId
           KeyType: RANGE
+      GlobalSecondaryIndexes:
+        # Query all questions for a grade (optionally filtered by topic)
+        - IndexName: grade-topic-index
+          KeySchema:
+            - AttributeName: grade
+              KeyType: HASH
+            - AttributeName: topic
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
+        # Query questions for a subtopic (optionally filtered by difficulty)
+        - IndexName: subtopic-difficulty-index
+          KeySchema:
+            - AttributeName: subtopic
+              KeyType: HASH
+            - AttributeName: difficulty
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
 
   # ── Lambda function ────────────────────────────────────────────────────────
   GetQuestionsFunction:

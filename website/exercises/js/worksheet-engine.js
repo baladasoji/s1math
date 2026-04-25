@@ -25,7 +25,7 @@ function init(questions, topicSlug) {
 
 function goNext() {
     const { questions, index, answers } = wsState;
-    if (answers[questions[index].id] === undefined) return;
+    if (answers[questions[index].questionId] === undefined) return;
     if (index === questions.length - 1) { showSummary(); return; }
     wsState.index = index + 1;
     renderCard(wsState.index);
@@ -54,7 +54,7 @@ function renderCard(index) {
     const { questions, answers } = wsState;
     const q      = questions[index];
     const total  = questions.length;
-    const done   = answers[q.id] !== undefined;
+    const done   = answers[q.questionId] !== undefined;
     const isLast = index === total - 1;
 
     // Progress bar reflects how many questions are answered (not position)
@@ -85,31 +85,32 @@ function renderCard(index) {
 
     // Re-attach event listeners after innerHTML replacement
     if (q.type === 'mcq' && !done) {
-        card.querySelectorAll('.ws-option').forEach((btn, j) => {
-            btn.addEventListener('click', () => selectMCQ(q.id, j));
+        card.querySelectorAll('.ws-option').forEach(btn => {
+            btn.addEventListener('click', () => selectMCQ(q.questionId, btn.dataset.key));
         });
     } else if (q.type === 'fill' && !done) {
-        const input    = document.getElementById(q.id + '-input');
-        const checkBtn = document.getElementById(q.id + '-check');
-        checkBtn.addEventListener('click', () => submitFill(q.id));
-        input.addEventListener('keydown', e => { if (e.key === 'Enter') submitFill(q.id); });
+        const input    = document.getElementById(q.questionId + '-input');
+        const checkBtn = document.getElementById(q.questionId + '-check');
+        checkBtn.addEventListener('click', () => submitFill(q.questionId));
+        input.addEventListener('keydown', e => { if (e.key === 'Enter') submitFill(q.questionId); });
         input.focus();
     }
 }
 
 function buildMCQCard(q, done) {
-    const isCorrect = wsState.answers[q.id];
-    const userPick  = wsState.selectedMCQ[q.id];
+    const isCorrect = wsState.answers[q.questionId];
+    const userKey   = wsState.selectedMCQ[q.questionId];
     const cardCls   = done ? (isCorrect ? 'ws-card ws-card-correct' : 'ws-card ws-card-wrong') : 'ws-card';
 
-    const options = q.options.map((opt, j) => {
+    const options = q.options.map(opt => {
         let cls = 'ws-option';
         if (done) {
-            if (j === q.correct)                    cls += ' ws-correct';
-            else if (j === userPick && !isCorrect)  cls += ' ws-wrong';
+            if (opt.key === q.correctKey)              cls += ' ws-correct';
+            else if (opt.key === userKey && !isCorrect) cls += ' ws-wrong';
             cls += ' ws-option-disabled';
         }
-        return `<button class="${cls}" ${done ? 'disabled' : ''}>${opt}</button>`;
+        return `<button class="${cls}" data-key="${opt.key}" ${done ? 'disabled' : ''}>`
+             + `<span class="ws-option-key">${opt.key}</span> ${opt.text}</button>`;
     }).join('');
 
     return `<div class="${cardCls}">
@@ -120,19 +121,19 @@ function buildMCQCard(q, done) {
 }
 
 function buildFillCard(q, done) {
-    const isCorrect = wsState.answers[q.id];
-    const savedVal  = wsState.fillInputs[q.id] || '';
+    const isCorrect = wsState.answers[q.questionId];
+    const savedVal  = wsState.fillInputs[q.questionId] || '';
     const cardCls   = done ? (isCorrect ? 'ws-card ws-card-correct' : 'ws-card ws-card-wrong') : 'ws-card';
     const inputCls  = done ? (isCorrect ? 'ws-input ws-input-correct' : 'ws-input ws-input-wrong') : 'ws-input';
 
     return `<div class="${cardCls}">
         <p class="ws-q-text">${q.text}</p>
         <div class="ws-fill-wrap">
-            <input class="${inputCls}" id="${q.id}-input" type="text"
+            <input class="${inputCls}" id="${q.questionId}-input" type="text"
                    placeholder="Your answer…"
                    value="${done ? savedVal : ''}"
                    ${done ? 'disabled' : ''}>
-            <button class="ws-submit-btn" id="${q.id}-check" ${done ? 'disabled' : ''}>Check</button>
+            <button class="ws-submit-btn" id="${q.questionId}-check" ${done ? 'disabled' : ''}>Check</button>
         </div>
         ${done ? feedbackHTML(isCorrect, q.explanation) : ''}
     </div>`;
@@ -146,23 +147,23 @@ function feedbackHTML(isCorrect, explanation) {
 
 // ── Answer handlers ──────────────────────────────────────────────────────────
 
-function selectMCQ(qId, selectedIndex) {
-    if (wsState.answers[qId] !== undefined) return;
-    const q = wsState.questions.find(q => q.id === qId);
-    wsState.answers[qId]     = selectedIndex === q.correct;
-    wsState.selectedMCQ[qId] = selectedIndex;
+function selectMCQ(questionId, selectedKey) {
+    if (wsState.answers[questionId] !== undefined) return;
+    const q = wsState.questions.find(q => q.questionId === questionId);
+    wsState.answers[questionId]     = selectedKey === q.correctKey;
+    wsState.selectedMCQ[questionId] = selectedKey;
     renderCard(wsState.index);
 }
 
-function submitFill(qId) {
-    if (wsState.answers[qId] !== undefined) return;
-    const input = document.getElementById(qId + '-input');
+function submitFill(questionId) {
+    if (wsState.answers[questionId] !== undefined) return;
+    const input = document.getElementById(questionId + '-input');
     const raw   = input.value.trim();
     if (!raw) return;
-    const q    = wsState.questions.find(q => q.id === qId);
+    const q    = wsState.questions.find(q => q.questionId === questionId);
     const norm = raw.toLowerCase().replace(/\s+/g, '');
-    wsState.answers[qId]    = q.answer.some(a => a.toLowerCase().replace(/\s+/g, '') === norm);
-    wsState.fillInputs[qId] = raw;
+    wsState.answers[questionId]    = q.acceptedAnswers.some(a => a.toLowerCase().replace(/\s+/g, '') === norm);
+    wsState.fillInputs[questionId] = raw;
     renderCard(wsState.index);
 }
 

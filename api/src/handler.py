@@ -10,20 +10,33 @@ table    = dynamodb.Table(os.environ['TABLE_NAME'])
 
 
 def lambda_handler(event, context):
-    topic = event.get('pathParameters', {}).get('topic', '')
+    params = event.get('pathParameters') or {}
+    qp     = event.get('queryStringParameters') or {}
 
+    topic = params.get('topic', '')
     if topic not in ALLOWED_TOPICS:
-        return _response(400, {'error': f"Unknown topic '{topic}'. Valid topics: {sorted(ALLOWED_TOPICS)}"})
+        return _response(400, {
+            'error': f"Unknown topic '{topic}'.",
+            'validTopics': sorted(ALLOWED_TOPICS),
+        })
+
+    # Optional filters via query string: ?subtopic=integers&difficulty=foundation
+    subtopic   = qp.get('subtopic')
+    difficulty = qp.get('difficulty')
 
     result = table.query(
         KeyConditionExpression=Key('topic').eq(topic),
-        ScanIndexForward=True,   # sort by questionId ascending
+        ScanIndexForward=True,
     )
+    questions = [_fix_types(q) for q in result.get('Items', [])]
 
-    questions = result.get('Items', [])
+    if subtopic:
+        questions = [q for q in questions if q.get('subtopic') == subtopic]
+    if difficulty:
+        questions = [q for q in questions if q.get('difficulty') == difficulty]
 
-    # DynamoDB returns Decimal for numbers; convert to int/float for JSON
-    questions = [_fix_types(q) for q in questions]
+    # Sort by partOrder then questionId for a stable display order
+    questions.sort(key=lambda q: (q.get('partOrder', 0), q.get('questionId', '')))
 
     return _response(200, questions)
 
@@ -35,7 +48,7 @@ def _response(status_code, body):
             'Content-Type': 'application/json',
             'Access-Control-Allow-Origin': '*',
         },
-        'body': json.dumps(body),
+        'body': json.dumps(body, ensure_ascii=False),
     }
 
 

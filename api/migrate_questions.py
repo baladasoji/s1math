@@ -3,12 +3,12 @@
 Migrate questions from local JS data files into DynamoDB.
 
 Usage:
-    python3 api/migrate_questions.py [--table TABLE_NAME] [--region REGION]
+    python3 api/migrate_questions.py [--table TABLE_NAME] [--region REGION] [--dry-run]
 
-Reads website/exercises/data/questions-{topic}.js for each topic, strips the
-JS wrapper, parses the JSON, and batch-writes every question to DynamoDB with:
-    PK  topic      = "numbers" | "algebra" | "geometry" | "set-theory"
-    SK  questionId = q.id  (e.g. "q001")
+Reads website/exercises/data/questions-{topic}.js for each topic and
+batch-writes every question to DynamoDB. The JS files are the source of truth;
+each question already contains all DynamoDB fields (topic, questionId, grade,
+subtopic, partOrder, difficulty, etc.).
 
 Run once after deploying the SAM stack. Safe to re-run — PutItem overwrites.
 """
@@ -42,8 +42,10 @@ process.stdout.write(JSON.stringify(eval(code)));
 
 
 def migrate(table_name: str, region: str, dry_run: bool = False):
-    dynamodb = boto3.resource('dynamodb', region_name=region)
-    table    = dynamodb.Table(table_name)
+    table = None
+    if not dry_run:
+        dynamodb = boto3.resource('dynamodb', region_name=region)
+        table    = dynamodb.Table(table_name)
 
     total = 0
     for topic, rel_path in TOPICS.items():
@@ -63,10 +65,7 @@ def migrate(table_name: str, region: str, dry_run: bool = False):
         # Batch write in chunks of 25 (DynamoDB limit)
         with table.batch_writer() as batch:
             for q in questions:
-                item = dict(q)
-                item['topic']      = topic
-                item['questionId'] = q['id']
-                batch.put_item(Item=item)
+                batch.put_item(Item=q)
 
         print(f' → written')
         total += len(questions)
