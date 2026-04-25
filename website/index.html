@@ -15,6 +15,7 @@
     </header>
 
     <nav>
+        <button class="nav-hamburger" aria-label="Toggle menu" id="nav-toggle">&#9776;</button>
         <ul>
             <li><a href="index.html" class="active">Dashboard</a></li>
             <li><a href="numbers.html">Numbers</a></li>
@@ -127,6 +128,23 @@
                 }
             });
         });
+    </script>
+
+    <script>
+    // Mobile nav toggle
+    document.getElementById('nav-toggle').addEventListener('click', function() {
+        var ul = this.nextElementSibling;
+        ul.classList.toggle('nav-open');
+    });
+    // Mobile dropdown toggle (tap instead of hover)
+    document.querySelectorAll('.nav-dropdown-toggle').forEach(function(toggle) {
+        toggle.addEventListener('click', function(e) {
+            if (window.innerWidth <= 768) {
+                e.preventDefault();
+                this.closest('.nav-dropdown').classList.toggle('dropdown-open');
+            }
+        });
+    });
     </script>
 </body>
 </html>
