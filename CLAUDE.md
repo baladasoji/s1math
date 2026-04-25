@@ -87,6 +87,19 @@ Accent colours by topic:
 
 Component classes that use `var(--accent)`: `.page-intro`, `.content-section h3`, `.subsection`, `.example-box`, `.context-box`, `.grid-item`, and all `.ws-*` worksheet classes.
 
+### Mobile responsive structure (`exercises/styles.css`)
+
+There are **two** `@media (max-width: 768px)` blocks and the order matters:
+
+1. **First block** (after nav/header styles) — nav, header, layout overrides. Safe to add general mobile rules here.
+2. **Second block** (end of file, after all `.ws-*` base styles) — card UI overrides (`.ws-card`, `.ws-option`, `.ws-btn`, etc.). These **must** stay at the end because the base `.ws-*` styles are declared after the first media block and would otherwise win the cascade.
+
+Key mobile decisions:
+- `header p` is `display: none` on mobile — the subtitle is hidden to keep the header compact during exercises.
+- `main { padding: 0.5rem 0 80px }` — top padding collapsed; bottom padding keeps content above the sticky nav bar.
+- `.ws-btn` has `white-space: nowrap` — prevents "← Prev" from wrapping to two lines.
+- After answering, `scrollToFeedback()` in `worksheet-engine.js` manually scrolls so feedback clears the sticky bottom nav bar (a plain `scrollIntoView` is not sufficient).
+
 ## Nav
 
 Both sites share the same hamburger-toggle pattern — no templating, so nav changes require editing every HTML file manually.
@@ -131,8 +144,12 @@ Questions are fetched at runtime from the API and stored in DynamoDB. The local 
 - `init(questions, topicSlug)` — sets state, renders first card
 - `goNext()`, `goPrev()`, `resetWorksheet()`
 
+`loadAndInit` reads `?subtopic=` from the URL query string and passes it to the API fetch so only that subtopic's questions load. The local fallback also filters by subtopic when offline.
+
 Internal state: `wsState = { questions, index, answers, selectedMCQ, fillInputs, topicSlug }`.  
 CSS for the card UI is in `exercises/styles.css` under `/* ===== CARD-FLIP EXERCISE UI ===== */`.
+
+**Subtopic navigation** — the exercise index page (`exercises/index.html`) uses a collapsible accordion: each topic expands to list its subtopics as direct links (`exercises-{topic}.html?subtopic=...`). Each exercise page nav also has a dropdown listing that topic's subtopics; desktop uses hover, mobile uses a toggle button.
 
 ## Adding a new exercise page
 
@@ -160,29 +177,6 @@ All four topic pages have been audited and aligned strictly to `syllabus/S1_Math
 
 ## Roadmap
 
-### ✅ Phase 1 — Repo split (complete)
-Reorganised `website/` into `website/content/` (curriculum site) and `website/exercises/` (practice site), each independently deployable to its own S3 bucket. Content nav replaced the Exercises dropdown with a single "Practice Exercises →" link. Exercise nav simplified to topic switcher + Back to Content. New `exercises/index.html` topic-selector landing page added.
+Phases 1–6 complete: repo split, card-flip UI, AWS infra (DynamoDB + Lambda + API GW), question migration, API wiring, mobile UX improvements, and subtopic-level navigation.
 
-### ✅ Phase 2 — Card-flip exercise UI (complete)
-Replaced the all-on-one-page worksheet with a mobile-first card-flip engine (`exercises/js/worksheet-engine.js`). One question per screen, sticky progress header (Q n of N + fill bar), sticky bottom Prev/Next nav bar, inline feedback, summary screen on completion. Engine API: `init(questions, topicSlug)`.
-
-### ✅ Phase 3 — AWS infrastructure (complete)
-DynamoDB table `s1math-questions` (PK: `topic`, SK: `questionId`), Python Lambda, and HTTP API Gateway route `GET /questions/{topic}`. Deployed via SAM (stack: `EuropeanMath`, region: `eu-north-1`). CORS open for all origins.
-
-### ✅ Phase 4 — Question migration (complete)
-`api/migrate_questions.py` uses Node.js to evaluate the `questions-*.js` files and batch-writes all 401 questions to DynamoDB. Re-runnable — PutItem overwrites.
-
-### ✅ Phase 5 — Wire exercises to API (complete)
-`worksheet-engine.js` fetches questions from API Gateway via `loadAndInit(topicSlug)`, with fallback to local `WS_QUESTIONS` if offline. Local data script tags removed from exercise pages.
-
----
-
-## Content status
-
-All S1 topic pages (`numbers.html`, `algebra.html`, `geometry.html`, `set-theory.html`) are complete and syllabus-aligned.
-
-`exercises-numbers.html` is complete: 101 questions (MCQ + fill-in) across 6 parts.
-
-`exercises-algebra.html`, `exercises-geometry.html`, and `exercises-set-theory.html` have 100 questions each in DynamoDB but the question content should be reviewed for syllabus alignment and difficulty distribution.
-
-S2 and S3 syllabi are available in `syllabus/` for future expansion.
+**Next:** review `exercises-algebra.html`, `exercises-geometry.html`, and `exercises-set-theory.html` question banks for syllabus alignment and difficulty distribution (100 questions each in DynamoDB). S2 and S3 syllabi are available in `syllabus/` for future expansion.
