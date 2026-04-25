@@ -1,0 +1,69 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: S1 Mathematics — Questions API (DynamoDB + Lambda + HTTP API Gateway)
+
+Globals:
+  Function:
+    Runtime: python3.12
+    Timeout: 10
+    Environment:
+      Variables:
+        TABLE_NAME: !Ref QuestionsTable
+
+Resources:
+
+  # ── DynamoDB table ─────────────────────────────────────────────────────────
+  QuestionsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: s1math-questions
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: topic
+          AttributeType: S
+        - AttributeName: questionId
+          AttributeType: S
+      KeySchema:
+        - AttributeName: topic
+          KeyType: HASH
+        - AttributeName: questionId
+          KeyType: RANGE
+
+  # ── Lambda function ────────────────────────────────────────────────────────
+  GetQuestionsFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: s1math-get-questions
+      CodeUri: api/src/
+      Handler: handler.lambda_handler
+      Policies:
+        - DynamoDBReadPolicy:
+            TableName: !Ref QuestionsTable
+      Events:
+        GetQuestions:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref QuestionsApi
+            Path: /questions/{topic}
+            Method: GET
+
+  # ── HTTP API Gateway ───────────────────────────────────────────────────────
+  QuestionsApi:
+    Type: AWS::Serverless::HttpApi
+    Properties:
+      StageName: prod
+      CorsConfiguration:
+        AllowOrigins:
+          - "*"
+        AllowMethods:
+          - GET
+        AllowHeaders:
+          - Content-Type
+
+Outputs:
+  ApiEndpoint:
+    Description: API Gateway endpoint URL
+    Value: !Sub "https://${QuestionsApi}.execute-api.${AWS::Region}.amazonaws.com/prod"
+  TableName:
+    Description: DynamoDB table name
+    Value: !Ref QuestionsTable
