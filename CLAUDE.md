@@ -24,29 +24,49 @@ Both sites work fully offline — no build step, no bundler, no dependencies.
 s1math/
 ├── docs/                       # Source PDF (European Schools curriculum)
 ├── syllabus/                   # Extracted markdown syllabi for S1, S2, S3
-├── api/                        # (Phase 3) Python Lambda + migration scripts
+├── api/                        # Python Lambda + migration scripts
+│   ├── src/handler.py          # Lambda handler
+│   ├── migrate_questions.py    # One-time DynamoDB seed script
+│   ├── pyproject.toml          # uv-managed deps (boto3)
+│   └── uv.lock
+├── template.yaml               # AWS SAM template (DynamoDB + Lambda + API GW)
+├── samconfig.toml              # SAM deploy defaults (stack: EuropeanMath, eu-north-1)
 └── website/
-    ├── content/                # Curriculum site → deploys to S3 bucket A
+    ├── content/                # Curriculum site → s3://s1math.dasoji.net
     │   ├── styles.css
     │   ├── index.html          # Dashboard
-    │   ├── numbers.html        # Topic pages
-    │   ├── algebra.html
-    │   ├── geometry.html
-    │   ├── set-theory.html
-    │   ├── learning-objectives.html
-    │   ├── assessment.html
-    │   └── resources.html
-    └── exercises/              # Practice site → deploys to S3 bucket B
+    │   └── *.html              # Topic + support pages
+    └── exercises/              # Practice site → s3://exercises.s1math.dasoji.net
         ├── styles.css
         ├── index.html          # Topic selector landing page
         ├── exercises-*.html    # One per topic
         ├── js/
         │   └── worksheet-engine.js   # Card-flip quiz engine
         └── data/
-            └── questions-*.js        # Question banks (401 questions total)
+            └── questions-*.js        # Local fallback question banks
 ```
 
-Cross-site links use relative paths (`../content/` and `../exercises/`) for local dev; in production these become full S3/CloudFront URLs.
+Cross-site links use relative paths (`../content/` and `../exercises/`) for local dev; in production these become full S3 URLs.
+
+## API
+
+Live endpoint: `https://9kzpj7v8g6.execute-api.eu-north-1.amazonaws.com/prod`
+
+Route: `GET /questions/{topic}` — returns all questions for a topic as JSON.  
+Optional query params: `?subtopic=integers` and/or `?difficulty=foundation`.
+
+The exercise site fetches from this API on page load (`loadAndInit` in `worksheet-engine.js`). The local `data/questions-*.js` files are a fallback if the API is unreachable.
+
+**To redeploy the API** after changing `template.yaml` or `api/src/handler.py`:
+```bash
+sam build && sam deploy
+```
+
+**To re-seed DynamoDB** after changing question files:
+```bash
+uv run --project api python3 api/migrate_questions.py --region eu-north-1
+# dry-run first: add --dry-run
+```
 
 ## CSS architecture
 
@@ -78,25 +98,50 @@ The hamburger button (`#nav-toggle`, `.nav-hamburger`) is visible only on mobile
 
 ## Exercise page architecture
 
-Questions live in `exercises/data/questions-{topic}.js` as a global `WS_QUESTIONS` array. The shared quiz engine is `exercises/js/worksheet-engine.js`. Exercise pages load both scripts and call `init(WS_QUESTIONS, topicSlug)` on `DOMContentLoaded`.
+Questions are fetched at runtime from the API and stored in DynamoDB. The local `data/questions-*.js` files mirror DynamoDB and serve as an offline fallback only — DynamoDB is the source of truth.
 
-Question object shape:
+**Question object shape (DynamoDB / API / JS files):**
 ```js
-{ id, part, type: 'mcq'|'fill', text, options[], correct, explanation }  // MCQ
-{ id, part, type: 'fill', text, answer[], explanation }                   // fill-in
+// MCQ
+{
+    topic, questionId,          // PK + SK  e.g. "numbers", "S1#numbers#001"
+    grade, subtopic, part, partOrder, difficulty,
+    type: 'mcq',
+    text,
+    options: [{ key: 'A', text: '...' }, ...],   // always A–D
+    correctKey: 'C',            // key of the correct option
+    explanation,
+}
+
+// Fill-in
+{
+    topic, questionId, grade, subtopic, part, partOrder, difficulty,
+    type: 'fill',
+    text,
+    acceptedAnswers: ['12', 'twelve'],   // any match is correct (normalised)
+    explanation,
+}
 ```
 
-Engine public API: `init(questions, topicSlug)`, `goNext()`, `goPrev()`, `resetWorksheet()`. Internal state is `wsState = { questions, index, answers, selectedMCQ, fillInputs, topicSlug }`. CSS for the card UI is in `exercises/styles.css` under `/* ===== CARD-FLIP EXERCISE UI ===== */`.
+**DynamoDB table:** `s1math-questions` — PK `topic`, SK `questionId` (`S1#topic#NNN`).  
+**GSIs:** `grade-topic-index` (all questions for a grade), `subtopic-difficulty-index` (by concept + difficulty).
 
-The card-flip UI shows one question at a time with a sticky progress header (Q n of N + fill bar) and a sticky bottom nav bar (← Prev | score | Next →). Answers are recorded in `wsState.answers` and the card re-renders to show feedback in place.
+**Engine public API** (`exercises/js/worksheet-engine.js`):
+- `loadAndInit(topicSlug)` — fetches from API, falls back to `WS_QUESTIONS` global, calls `init()`
+- `init(questions, topicSlug)` — sets state, renders first card
+- `goNext()`, `goPrev()`, `resetWorksheet()`
+
+Internal state: `wsState = { questions, index, answers, selectedMCQ, fillInputs, topicSlug }`.  
+CSS for the card UI is in `exercises/styles.css` under `/* ===== CARD-FLIP EXERCISE UI ===== */`.
 
 ## Adding a new exercise page
 
 1. Copy `exercises/exercises-numbers.html` as a template.
 2. Update `<title>`, header text, and the `:root` accent variables.
-3. Create `exercises/data/questions-{topic}.js` with the `WS_QUESTIONS` array.
-4. Update `init(WS_QUESTIONS, 'topic-slug')` to pass the correct slug (matches the content page filename, e.g. `'set-theory'`).
+3. Create `exercises/data/questions-{topic}.js` with the `WS_QUESTIONS` array using the schema above.
+4. Update `loadAndInit('topic-slug')` to pass the correct slug (matches the content page filename, e.g. `'set-theory'`).
 5. Add a link to the new page in `exercises/index.html` and in the nav `<ul>` of all other exercise pages.
+6. Run `migrate_questions.py` to seed the new questions into DynamoDB.
 
 ## Curriculum source
 
@@ -122,13 +167,13 @@ Reorganised `website/` into `website/content/` (curriculum site) and `website/ex
 Replaced the all-on-one-page worksheet with a mobile-first card-flip engine (`exercises/js/worksheet-engine.js`). One question per screen, sticky progress header (Q n of N + fill bar), sticky bottom Prev/Next nav bar, inline feedback, summary screen on completion. Engine API: `init(questions, topicSlug)`.
 
 ### ✅ Phase 3 — AWS infrastructure (complete)
-Create DynamoDB table `s1math-questions` (PK: `topic`, SK: `questionId`), Python Lambda function, and HTTP API Gateway route `GET /questions/{topic}`. Deploy content site to S3 bucket A, exercises site to S3 bucket B. No auth required — read-only public API.
+DynamoDB table `s1math-questions` (PK: `topic`, SK: `questionId`), Python Lambda, and HTTP API Gateway route `GET /questions/{topic}`. Deployed via SAM (stack: `EuropeanMath`, region: `eu-north-1`). CORS open for all origins.
 
 ### ✅ Phase 4 — Question migration (complete)
-One-time migration script (`api/migrate_questions.py`) that strips the `const WS_QUESTIONS =` wrapper from each `data/questions-*.js` file and batch-writes all 401 questions to DynamoDB.
+`api/migrate_questions.py` uses Node.js to evaluate the `questions-*.js` files and batch-writes all 401 questions to DynamoDB. Re-runnable — PutItem overwrites.
 
 ### ✅ Phase 5 — Wire exercises to API (complete)
-Update `worksheet-engine.js` to fetch questions from API Gateway (`GET /questions/{topic}`) with a fallback to the local `WS_QUESTIONS` global if the API is unavailable. Remove `<script src="data/questions-*.js">` tags once the API is confirmed live.
+`worksheet-engine.js` fetches questions from API Gateway via `loadAndInit(topicSlug)`, with fallback to local `WS_QUESTIONS` if offline. Local data script tags removed from exercise pages.
 
 ---
 
@@ -136,8 +181,8 @@ Update `worksheet-engine.js` to fetch questions from API Gateway (`GET /question
 
 All S1 topic pages (`numbers.html`, `algebra.html`, `geometry.html`, `set-theory.html`) are complete and syllabus-aligned.
 
-`exercises-numbers.html` is complete: 100 questions (80 MCQ, 20 fill-in) across 6 parts — Natural Numbers & Integers (18), Integers & Number Line (14), Fractions & Decimals (18), Operations & BODMAS (14), Primes/Factors/Divisibility (20), Real-World Applications (16).
+`exercises-numbers.html` is complete: 101 questions (MCQ + fill-in) across 6 parts.
 
-`exercises-algebra.html`, `exercises-geometry.html`, and `exercises-set-theory.html` are stubs — each needs ~100 questions following the exercise page pattern above, scoped strictly to the S1 syllabus boundaries listed above.
+`exercises-algebra.html`, `exercises-geometry.html`, and `exercises-set-theory.html` have 100 questions each in DynamoDB but the question content should be reviewed for syllabus alignment and difficulty distribution.
 
 S2 and S3 syllabi are available in `syllabus/` for future expansion.
