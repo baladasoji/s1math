@@ -891,6 +891,12 @@ code {
 
     header h1 {
         font-size: 1.1rem;
+        margin-bottom: 0;
+    }
+
+    /* Hide subtitle during exercises — saves ~3 lines of header height */
+    header p {
+        display: none;
     }
 
     .nav-hamburger {
@@ -1149,9 +1155,10 @@ code {
     /* MCQ options: full-width rows with proper touch targets */
     .ws-option {
         width: 100%;
-        min-height: 48px;
+        min-height: 44px;
         display: flex;
         align-items: center;
+        padding: 0.5rem 0.9rem;
     }
 
     /* Fill input: fluid width, stacked layout */
@@ -1159,8 +1166,8 @@ code {
     .ws-input { width: 100%; }
     .ws-submit-btn { width: 100%; min-height: 48px; }
 
-    /* Larger touch targets for Prev/Next buttons */
-    .ws-btn { min-height: 48px; padding: 0.75rem 1.2rem; }
+    /* Larger touch targets for Prev/Next buttons — nowrap prevents "← Prev" splitting */
+    .ws-btn { min-height: 48px; padding: 0.65rem 1rem; white-space: nowrap; }
 
     /* Tighten bottom nav bar spacing */
     .ws-nav-bar { padding: 0.6rem 0 0.75rem; margin-top: 0.75rem; }
