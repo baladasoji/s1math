@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geometry - S1 Mathematics</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>:root { --accent: #4facfe; --accent-subtle: #f0f8ff; --accent-subtle-2: #e0f0ff; --accent-border-light: #8fd4ff; --accent-bg: #f5fbff; }</style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>🎨 Geometry</h1>
+            <p>Shapes, Space, and Spatial Reasoning</p>
+        </div>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Dashboard</a></li>
+            <li><a href="numbers.html">Numbers</a></li>
+            <li><a href="algebra.html">Algebra</a></li>
+            <li><a href="geometry.html" class="active">Geometry</a></li>
+            <li><a href="set-theory.html">Set Theory</a></li>
+            <li><a href="learning-objectives.html">Competences</a></li>
+            <li><a href="assessment.html">Assessment</a></li>
+            <li><a href="resources.html">Resources</a></li>
+            <li class="nav-dropdown">
+                <a href="#" class="nav-dropdown-toggle">Exercises ▾</a>
+                <ul class="dropdown-menu">
+                    <li><a href="exercises-numbers.html">🔢 Numbers</a></li>
+                    <li><a href="exercises-algebra.html">📐 Algebra</a></li>
+                    <li><a href="exercises-geometry.html">🎨 Geometry</a></li>
+                    <li><a href="exercises-set-theory.html">⚡ Set Theory</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+
+    <main>
+        <div class="container">
+            <div class="page-intro">
+                <h2>Geometry: Shapes, Space, and Measurement</h2>
+                <p>S1 Geometry covers three main areas: 3D shapes and their properties, 2D shapes and constructions, and measurement. Students learn to classify, draw, construct, and measure geometric objects using appropriate tools and units.</p>
+            </div>
+
+            <div class="content-section">
+                <h3>3D Shapes</h3>
+
+                <h4>Top and Side Views (Plan and Elevation)</h4>
+                <p>A 3D shape can be represented by drawing what it looks like from different directions:</p>
+                <ul>
+                    <li><strong>Top view (plan view):</strong> the shape as seen from directly above</li>
+                    <li><strong>Front elevation:</strong> the shape as seen from the front</li>
+                    <li><strong>Side elevation:</strong> the shape as seen from the side</li>
+                </ul>
+                <div class="example-box">
+                    <strong>Example — Cuboid (3 cm × 2 cm × 2 cm):</strong>
+                    <ul style="margin-top: 0.5rem; margin-left: 1.5rem;">
+                        <li>Top view: a 3 cm × 2 cm rectangle</li>
+                        <li>Front elevation: a 3 cm × 2 cm rectangle</li>
+                        <li>Side elevation: a 2 cm × 2 cm square</li>
+                    </ul>
+                    <p style="margin-top: 0.5rem;">Engineers and architects use plan and elevation drawings to describe objects without needing a physical model.</p>
+                </div>
+
+                <h4>Classifying 3D Shapes</h4>
+                <p>3D shapes are classified by the number of faces, edges, and vertices, and by whether their faces are flat or curved.</p>
+                <div class="subsection">
+                    <h5>Properties of Common 3D Shapes</h5>
+                    <table style="width:100%; border-collapse: collapse; margin-top: 0.5rem;">
+                        <thead>
+                            <tr style="background: var(--accent-subtle-2);">
+                                <th style="padding: 0.5rem; border: 1px solid var(--accent-border-light); text-align: left;">Shape</th>
+                                <th style="padding: 0.5rem; border: 1px solid var(--accent-border-light); text-align: left;">Faces</th>
+                                <th style="padding: 0.5rem; border: 1px solid var(--accent-border-light); text-align: left;">Edges</th>
+                                <th style="padding: 0.5rem; border: 1px solid var(--accent-border-light); text-align: left;">Vertices</th>
+                                <th style="padding: 0.5rem; border: 1px solid var(--accent-border-light); text-align: left;">Face types</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="padding: 0.5rem; border: 1px solid var(--accent-border-light);">Cuboid</td>
+                                <td style="padding: 0.5rem; border: 1px solid var(--accent-border-light);">6</td>
+                                <td style="padding: 0.5rem; border: 1px solid var(--accent-border-light);">12</td>
+                                <td style="padding: 0.5rem; border: 1px solid var(--accent-border-light);">8</td>
+                                <td style="padding: 0.5rem; border: 1px solid var(--accent-border-light);">6 flat rectangular faces</td>
+                            </tr>
+                            <tr style="background: var(--accent-subtle);">
+                                <td style="padding: 0.5rem; border: 1px solid var(--accent-border-light);">Triangular Prism</td>
+                                <td style="padding: 0.5rem; border: 1px solid var(--accent-border-light);">5</td>
+                                <td style="padding: 0.5rem; border: 1px solid var(--accent-border-light);">9</td>
+                                <td style="padding: 0.5rem; border: 1px solid var(--accent-border-light);">6</td>
+                                <td style="padding: 0.5rem; border: 1px solid var(--accent-border-light);">2 triangular + 3 rectangular flat faces</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 0.5rem; border: 1px solid var(--accent-border-light);">Square Pyramid</td>
+                                <td style="padding: 0.5rem; border: 1px solid var(--accent-border-light);">5</td>
+                                <td style="padding: 0.5rem; border: 1px solid var(--accent-border-light);">8</td>
+                                <td style="padding: 0.5rem; border: 1px solid var(--accent-border-light);">5</td>
+                                <td style="padding: 0.5rem; border: 1px solid var(--accent-border-light);">1 square base + 4 triangular flat faces</td>
+                            </tr>
+                            <tr style="background: var(--accent-subtle);">
+                                <td style="padding: 0.5rem; border: 1px solid var(--accent-border-light);">Cylinder</td>
+                                <td style="padding: 0.5rem; border: 1px solid var(--accent-border-light);">3</td>
+                                <td style="padding: 0.5rem; border: 1px solid var(--accent-border-light);">2</td>
+                                <td style="padding: 0.5rem; border: 1px solid var(--accent-border-light);">0</td>
+                                <td style="padding: 0.5rem; border: 1px solid var(--accent-border-light);">2 flat circular + 1 curved face</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 0.5rem; border: 1px solid var(--accent-border-light);">Cone</td>
+                                <td style="padding: 0.5rem; border: 1px solid var(--accent-border-light);">2</td>
+                                <td style="padding: 0.5rem; border: 1px solid var(--accent-border-light);">1</td>
+                                <td style="padding: 0.5rem; border: 1px solid var(--accent-border-light);">1</td>
+                                <td style="padding: 0.5rem; border: 1px solid var(--accent-border-light);">1 flat circular base + 1 curved face</td>
+                            </tr>
+                            <tr style="background: var(--accent-subtle);">
+                                <td style="padding: 0.5rem; border: 1px solid var(--accent-border-light);">Sphere</td>
+                                <td style="padding: 0.5rem; border: 1px solid var(--accent-border-light);">1</td>
+                                <td style="padding: 0.5rem; border: 1px solid var(--accent-border-light);">0</td>
+                                <td style="padding: 0.5rem; border: 1px solid var(--accent-border-light);">0</td>
+                                <td style="padding: 0.5rem; border: 1px solid var(--accent-border-light);">1 curved face only</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="example-box">
+                    <strong>Parallel and perpendicular faces:</strong>
+                    <ul style="margin-top: 0.5rem; margin-left: 1.5rem;">
+                        <li>In a cuboid, opposite faces are parallel; adjacent faces are perpendicular.</li>
+                        <li>In a triangular prism, the two triangular faces are parallel to each other.</li>
+                        <li>Curved faces (cylinder, cone, sphere) are neither parallel nor perpendicular to flat faces.</li>
+                    </ul>
+                </div>
+
+                <h4>Drawing 3D Shapes</h4>
+                <ul>
+                    <li><strong>By hand:</strong> cubes and cuboids can be drawn by hand using isometric (dot) paper or oblique projection.</li>
+                    <li><strong>Using CAD software:</strong> prisms, cylinders, pyramids, cones, and spheres can be drawn precisely using computer-aided design tools.</li>
+                </ul>
+
+                <h4>Nets of 3D Shapes</h4>
+                <p>A <strong>net</strong> is a flat (2D) shape that can be folded to form a 3D shape. It shows every face of the solid laid out flat without overlapping.</p>
+                <div class="example-box">
+                    <strong>Example — Net of a cube:</strong>
+                    <p style="margin-top: 0.5rem;">A cube has 6 square faces. A net of a cube consists of 6 squares arranged so that, when folded, each square becomes one face. There are 11 distinct nets for a cube.</p>
+                    <p style="margin-top: 0.5rem;"><strong>Prisms:</strong> the net has two congruent polygonal ends joined by rectangles (one per lateral edge).</p>
+                    <p style="margin-top: 0.5rem;"><strong>Pyramids:</strong> the net has one polygonal base surrounded by triangular faces (one per base edge).</p>
+                </div>
+            </div>
+
+            <div class="content-section">
+                <h3>2D Shapes</h3>
+
+                <h4>Recognising and Naming 2D Shapes</h4>
+                <div class="grid-2">
+                    <div class="grid-item">
+                        <h5>Triangles</h5>
+                        <ul>
+                            <li><strong>Equilateral:</strong> 3 equal sides, 3 equal angles (60° each)</li>
+                            <li><strong>Isosceles:</strong> 2 equal sides, 2 equal base angles</li>
+                            <li><strong>Scalene:</strong> no equal sides, no equal angles</li>
+                            <li><strong>Right-angled:</strong> one angle exactly 90°</li>
+                        </ul>
+                    </div>
+                    <div class="grid-item">
+                        <h5>Quadrilaterals</h5>
+                        <ul>
+                            <li><strong>Square:</strong> 4 equal sides, 4 right angles</li>
+                            <li><strong>Rectangle:</strong> 2 pairs of equal parallel sides, 4 right angles</li>
+                            <li><strong>Rhombus:</strong> 4 equal sides, opposite angles equal</li>
+                            <li><strong>Parallelogram:</strong> 2 pairs of parallel sides</li>
+                            <li><strong>Trapezium:</strong> exactly one pair of parallel sides</li>
+                        </ul>
+                    </div>
+                    <div class="grid-item">
+                        <h5>Regular Polygons (up to decagon)</h5>
+                        <ul>
+                            <li>Pentagon — 5 sides</li>
+                            <li>Hexagon — 6 sides</li>
+                            <li>Heptagon — 7 sides</li>
+                            <li>Octagon — 8 sides</li>
+                            <li>Nonagon — 9 sides</li>
+                            <li>Decagon — 10 sides</li>
+                        </ul>
+                    </div>
+                    <div class="grid-item">
+                        <h5>Circle</h5>
+                        <p>All points on the boundary are the same distance from the centre. Key terms: <strong>radius</strong> (centre to edge), <strong>diameter</strong> (across through centre = 2r), <strong>circumference</strong> (boundary length).</p>
+                    </div>
+                </div>
+
+                <h4>Classifying 2D Shapes by Parallelism, Perpendicularity, and Equal Sides</h4>
+                <div class="subsection">
+                    <h5>Parallelism</h5>
+                    <p>Two lines are <strong>parallel</strong> if they never meet and are always the same distance apart.</p>
+                    <ul>
+                        <li>Rectangle and square: opposite sides are parallel.</li>
+                        <li>Parallelogram: both pairs of opposite sides are parallel.</li>
+                        <li>Trapezium: exactly one pair of parallel sides.</li>
+                        <li>Equilateral triangle: no sides are parallel.</li>
+                    </ul>
+                </div>
+                <div class="subsection">
+                    <h5>Perpendicularity</h5>
+                    <p>Two lines are <strong>perpendicular</strong> if they meet at a right angle (90°).</p>
+                    <ul>
+                        <li>Square and rectangle: adjacent sides are perpendicular.</li>
+                        <li>Right-angled triangle: the two shorter sides forming the right angle are perpendicular.</li>
+                    </ul>
+                </div>
+                <div class="subsection">
+                    <h5>Equal Sides</h5>
+                    <ul>
+                        <li><strong>Equilateral triangle:</strong> 3 equal sides.</li>
+                        <li><strong>Isosceles triangle:</strong> 2 equal sides.</li>
+                        <li><strong>Square and rhombus:</strong> 4 equal sides.</li>
+                        <li><strong>Regular polygon:</strong> all sides equal.</li>
+                    </ul>
+                </div>
+
+                <h4>Measuring and Constructing Line Segments and Angles</h4>
+                <ul>
+                    <li><strong>Ruler:</strong> used to measure the length of a line segment in mm or cm, and to draw line segments of a given length.</li>
+                    <li><strong>Protractor:</strong> used to measure angles in degrees and to draw angles of a given size.</li>
+                    <li><strong>Set-square:</strong> used to draw and check right angles (90°) and also 45°, 30°, and 60° angles.</li>
+                </ul>
+
+                <h4>Constructing Triangles</h4>
+                <p>A triangle can be uniquely constructed when enough information about its sides and angles is given.</p>
+                <div class="grid-2">
+                    <div class="grid-item">
+                        <h5>SSS (Side-Side-Side)</h5>
+                        <p>All three side lengths are known. Draw the base, then use a compass to mark arcs from each end at the given lengths; the intersection gives the third vertex.</p>
+                    </div>
+                    <div class="grid-item">
+                        <h5>SAS (Side-Angle-Side)</h5>
+                        <p>Two side lengths and the angle between them are known. Draw one side, use a protractor to mark the angle at one end, then measure the second side along that direction.</p>
+                    </div>
+                    <div class="grid-item">
+                        <h5>SSA (Side-Side-Angle)</h5>
+                        <p>Two side lengths and a non-included angle are known. Draw the known side, mark the angle, then use a compass with the second side length to find the third vertex.</p>
+                    </div>
+                    <div class="grid-item">
+                        <h5>ASA (Angle-Side-Angle)</h5>
+                        <p>Two angles and the side between them are known. Draw the base (included side), then use a protractor to draw the two angles at each end; the lines meet at the third vertex.</p>
+                    </div>
+                </div>
+
+                <h4>Compass Directions and Angles as Turns</h4>
+                <p>An <strong>angle</strong> measures the amount of turn between two directions. We can develop this idea using compass bearings.</p>
+                <div class="example-box">
+                    <strong>Compass directions — N, S, E, W:</strong>
+                    <ul style="margin-top: 0.5rem; margin-left: 1.5rem;">
+                        <li>Turning from North to East (clockwise) is a turn of <strong>90°</strong>.</li>
+                        <li>Turning from North to South (clockwise) is a turn of <strong>180°</strong>.</li>
+                        <li>Turning from North back to North (a full turn) is <strong>360°</strong>.</li>
+                        <li>Intermediate directions: NE is 45° clockwise from N; SE is 135° clockwise from N.</li>
+                    </ul>
+                    <p style="margin-top: 0.5rem;">Angles are used in navigation to describe bearing: e.g., "walk 5 km on a bearing of 090°" means walk due East for 5 km.</p>
+                </div>
+            </div>
+
+            <div class="content-section">
+                <h3>Measurements</h3>
+
+                <h4>Geometrical Objects and Their Measures</h4>
+                <p>It is important to distinguish between a <strong>geometric object</strong> (e.g., a line segment, a square) and its <strong>measure</strong> (e.g., the length of the segment, the area of the square). The object is the shape; the measure is the numerical value assigned to one of its properties using a chosen unit.</p>
+
+                <h4>Estimating and Measuring Length</h4>
+                <ul>
+                    <li>Use a ruler to measure lengths accurately in mm or cm.</li>
+                    <li>Estimate lengths before measuring: e.g., a door is about 2 m tall; a pencil is about 15 cm long.</li>
+                    <li>Choose an appropriate unit for the size of the object being measured.</li>
+                </ul>
+
+                <h4>Units of Length and Mass</h4>
+                <div class="subsection">
+                    <h5>Metric Units</h5>
+                    <ul>
+                        <li><strong>Length:</strong> millimetre (mm), centimetre (cm), metre (m), kilometre (km)</li>
+                        <li><strong>Mass:</strong> milligram (mg), gram (g), kilogram (kg)</li>
+                    </ul>
+                    <div class="example-box">
+                        <strong>Metric conversions:</strong>
+                        <ul style="margin-top: 0.5rem; margin-left: 1.5rem;">
+                            <li>10 mm = 1 cm</li>
+                            <li>100 cm = 1 m</li>
+                            <li>1000 m = 1 km</li>
+                            <li>1000 mg = 1 g</li>
+                            <li>1000 g = 1 kg</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="subsection">
+                    <h5>Imperial Units and Conversions</h5>
+                    <p>Imperial units are still used in some countries (e.g., UK, USA). Common units and approximate conversions:</p>
+                    <div class="example-box">
+                        <strong>Length:</strong>
+                        <ul style="margin-top: 0.5rem; margin-left: 1.5rem;">
+                            <li>1 inch ≈ 2.54 cm</li>
+                            <li>1 foot = 12 inches ≈ 30.5 cm</li>
+                            <li>1 mile ≈ 1.6 km</li>
+                        </ul>
+                        <strong>Mass:</strong>
+                        <ul style="margin-top: 0.5rem; margin-left: 1.5rem;">
+                            <li>1 pound (lb) ≈ 454 g</li>
+                            <li>1 kg ≈ 2.2 pounds</li>
+                            <li>1 ounce (oz) ≈ 28 g</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h4>Area: Estimation Using Unit Squares</h4>
+                <p>The <strong>area</strong> of a shape is the amount of flat surface it covers. One way to understand area is to count how many unit squares fit inside the shape.</p>
+                <div class="example-box">
+                    <strong>Counting unit squares:</strong>
+                    <p style="margin-top: 0.5rem;">Draw a shape on squared paper. Count the whole squares inside the shape. For squares that are partly inside, use estimation (roughly half a square counts as ½). The total gives an estimate of the area in square units.</p>
+                    <p style="margin-top: 0.5rem;"><strong>From counting to formula:</strong> For a rectangle that is 4 units long and 3 units wide, counting squares gives 12 square units. This matches the formula: Area = length × width = 4 × 3 = 12.</p>
+                </div>
+
+                <h4>Perimeter and Area of Squares and Rectangles</h4>
+                <div class="grid-2">
+                    <div class="grid-item">
+                        <h5>Rectangle</h5>
+                        <p><strong>Perimeter</strong> = 2 × (length + width) = 2(l + w)</p>
+                        <p><strong>Area</strong> = length × width = l × w</p>
+                    </div>
+                    <div class="grid-item">
+                        <h5>Square</h5>
+                        <p><strong>Perimeter</strong> = 4 × side = 4s</p>
+                        <p><strong>Area</strong> = side × side = s²</p>
+                    </div>
+                </div>
+                <div class="example-box">
+                    <strong>Example:</strong> A rectangle is 8 cm long and 5 cm wide.
+                    <ul style="margin-top: 0.5rem; margin-left: 1.5rem;">
+                        <li>Perimeter = 2 × (8 + 5) = 2 × 13 = <strong>26 cm</strong></li>
+                        <li>Area = 8 × 5 = <strong>40 cm²</strong></li>
+                    </ul>
+                </div>
+
+                <h4>Volume: Counting Unit Cubes in a Cuboid</h4>
+                <p>The <strong>volume</strong> of a solid is the amount of 3D space it occupies. To develop this concept, imagine filling a box with unit cubes (each cube is 1 cm × 1 cm × 1 cm).</p>
+                <div class="example-box">
+                    <strong>Building up the idea:</strong>
+                    <ul style="margin-top: 0.5rem; margin-left: 1.5rem;">
+                        <li>A single layer of a cuboid that is 4 units long and 3 units wide holds 4 × 3 = 12 unit cubes.</li>
+                        <li>If the cuboid is 2 units tall, there are 2 layers, so the total is 12 × 2 = 24 unit cubes.</li>
+                        <li>This gives the formula: <strong>Volume = length × width × height = l × w × h</strong></li>
+                    </ul>
+                    <p style="margin-top: 0.5rem;"><strong>Example:</strong> A cuboid 5 cm × 3 cm × 2 cm has volume = 5 × 3 × 2 = <strong>30 cm³</strong>.</p>
+                </div>
+
+                <div class="context-box">
+                    <h5>Real-world connections</h5>
+                    <p>Plan views are used by architects and engineers. Nets are used to design packaging. Compass bearings are used in navigation and orienteering. Metric and imperial conversions matter when reading maps, recipes, or product labels from different countries. Measuring area and volume is essential in construction, cooking, and science.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 S1 Mathematics Curriculum. All rights reserved.</p>
+        <p>Designed for educational purposes.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+            const navLinks = document.querySelectorAll('nav a');
+            navLinks.forEach(link => {
+                if (link.getAttribute('href') === currentPage) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

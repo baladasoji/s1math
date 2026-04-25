@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geometry Exercises - S1 Mathematics</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>:root { --accent: #4facfe; --accent-subtle: #f0f8ff; --accent-subtle-2: #e0f0ff; --accent-border-light: #8fd4ff; --accent-bg: #f5fbff; }</style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>🎨 Geometry — Exercises</h1>
+            <p>3D &amp; 2D Shapes, Nets, Construction, Measurement · 100 questions across 5 parts</p>
+        </div>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Dashboard</a></li>
+            <li><a href="numbers.html">Numbers</a></li>
+            <li><a href="algebra.html">Algebra</a></li>
+            <li><a href="geometry.html">Geometry</a></li>
+            <li><a href="set-theory.html">Set Theory</a></li>
+            <li><a href="learning-objectives.html">Competences</a></li>
+            <li><a href="assessment.html">Assessment</a></li>
+            <li><a href="resources.html">Resources</a></li>
+            <li class="nav-dropdown">
+                <a href="#" class="nav-dropdown-toggle">Exercises ▾</a>
+                <ul class="dropdown-menu">
+                    <li><a href="exercises-numbers.html">🔢 Numbers</a></li>
+                    <li><a href="exercises-algebra.html">📐 Algebra</a></li>
+                    <li><a href="exercises-geometry.html">🎨 Geometry</a></li>
+                    <li><a href="exercises-set-theory.html">⚡ Set Theory</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+
+    <main>
+        <div class="container">
+            <div class="page-intro">
+                <h2>Geometry: Interactive Practice</h2>
+                <p>Work through all questions at your own pace. Each answer gives instant feedback with an explanation. Your score updates as you go — aim for 80% or above!</p>
+            </div>
+
+            <div class="content-section">
+                <div class="ws-score-bar">
+                    <div>
+                        <span class="ws-score-label">Score</span>
+                        <span class="ws-score-value">
+                            <span id="ws-correct">0</span>&thinsp;/&thinsp;<span id="ws-total">0</span>
+                        </span>
+                    </div>
+                    <div class="ws-progress-wrap">
+                        <div class="ws-progress-bar" id="ws-progress"></div>
+                    </div>
+                    <button class="ws-reset-btn" onclick="resetWorksheet()">↺ Reset</button>
+                </div>
+
+                <div id="ws-questions"></div>
+
+                <div class="ws-final" id="ws-final" style="display:none;">
+                    <h4 id="ws-final-title"></h4>
+                    <p id="ws-final-msg"></p>
+                    <p style="margin-top:1rem;">
+                        <a href="geometry.html" style="color:var(--accent); font-weight:600;">← Back to Geometry topic</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 S1 Mathematics Curriculum. All rights reserved.</p>
+        <p>Designed for educational purposes.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+            document.querySelectorAll('nav a').forEach(link => {
+                link.classList.toggle('active', link.getAttribute('href') === currentPage);
+            });
+        });
+    </script>
+
+    <script src="data/questions-geometry.js"></script>
+    <script src="js/worksheet-engine.js"></script>
+</body>
+</html>
