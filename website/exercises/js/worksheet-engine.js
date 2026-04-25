@@ -8,14 +8,23 @@ const API_BASE = 'https://9kzpj7v8g6.execute-api.eu-north-1.amazonaws.com/prod';
 async function loadAndInit(topicSlug) {
     showLoading();
     try {
-        const res = await fetch(`${API_BASE}/questions/${topicSlug}`);
+        const params   = new URLSearchParams(window.location.search);
+        const subtopic = params.get('subtopic');
+        let url = `${API_BASE}/questions/${topicSlug}`;
+        if (subtopic) url += `?subtopic=${encodeURIComponent(subtopic)}`;
+        const res = await fetch(url);
         if (!res.ok) throw new Error(`API returned ${res.status}`);
         const questions = await res.json();
         init(questions, topicSlug);
     } catch (err) {
         console.warn('API unavailable, falling back to local data:', err.message);
         if (typeof WS_QUESTIONS !== 'undefined' && WS_QUESTIONS.length) {
-            init(WS_QUESTIONS, topicSlug);
+            const params   = new URLSearchParams(window.location.search);
+            const subtopic = params.get('subtopic');
+            const filtered = subtopic
+                ? WS_QUESTIONS.filter(q => q.subtopic === subtopic)
+                : WS_QUESTIONS;
+            init(filtered.length ? filtered : WS_QUESTIONS, topicSlug);
         } else {
             showError();
         }

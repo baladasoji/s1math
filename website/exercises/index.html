@@ -18,10 +18,46 @@
         <button class="nav-hamburger" aria-label="Toggle menu" id="nav-toggle">&#9776;</button>
         <ul>
             <li><a href="../content/index.html">← Back to Content</a></li>
-            <li><a href="exercises-numbers.html">🔢 Numbers</a></li>
-            <li><a href="exercises-algebra.html">📐 Algebra</a></li>
-            <li><a href="exercises-geometry.html">🎨 Geometry</a></li>
-            <li><a href="exercises-set-theory.html">⚡ Set Theory</a></li>
+            <li class="nav-dropdown">
+                <a href="exercises-numbers.html">🔢 Numbers</a><button class="dropdown-toggle" aria-label="Show subtopics">▾</button>
+                <ul class="dropdown-menu">
+                    <li><a href="exercises-numbers.html?subtopic=natural-numbers-integers">Integers &amp; Natural Numbers</a></li>
+                    <li><a href="exercises-numbers.html?subtopic=number-line">The Number Line</a></li>
+                    <li><a href="exercises-numbers.html?subtopic=fractions-decimals">Fractions &amp; Decimals</a></li>
+                    <li><a href="exercises-numbers.html?subtopic=bodmas">Order of Operations (BODMAS)</a></li>
+                    <li><a href="exercises-numbers.html?subtopic=primes-factors">Primes, HCF &amp; LCM</a></li>
+                    <li><a href="exercises-numbers.html?subtopic=real-world">Real-World Problems</a></li>
+                </ul>
+            </li>
+            <li class="nav-dropdown">
+                <a href="exercises-algebra.html">📐 Algebra</a><button class="dropdown-toggle" aria-label="Show subtopics">▾</button>
+                <ul class="dropdown-menu">
+                    <li><a href="exercises-algebra.html?subtopic=sequences-patterns">Sequences &amp; Patterns</a></li>
+                    <li><a href="exercises-algebra.html?subtopic=sequences-nth-term">The nth Term</a></li>
+                    <li><a href="exercises-algebra.html?subtopic=tables-of-values">Tables of Values</a></li>
+                    <li><a href="exercises-algebra.html?subtopic=simplifying">Simplifying Expressions</a></li>
+                    <li><a href="exercises-algebra.html?subtopic=linear-equations">Linear Equations</a></li>
+                </ul>
+            </li>
+            <li class="nav-dropdown">
+                <a href="exercises-geometry.html">🎨 Geometry</a><button class="dropdown-toggle" aria-label="Show subtopics">▾</button>
+                <ul class="dropdown-menu">
+                    <li><a href="exercises-geometry.html?subtopic=3d-shapes">3D Shapes</a></li>
+                    <li><a href="exercises-geometry.html?subtopic=nets">Nets of Solids</a></li>
+                    <li><a href="exercises-geometry.html?subtopic=2d-shapes">2D Shapes</a></li>
+                    <li><a href="exercises-geometry.html?subtopic=construction">Triangle Construction</a></li>
+                    <li><a href="exercises-geometry.html?subtopic=measurement">Measurement</a></li>
+                </ul>
+            </li>
+            <li class="nav-dropdown">
+                <a href="exercises-set-theory.html">⚡ Set Theory</a><button class="dropdown-toggle" aria-label="Show subtopics">▾</button>
+                <ul class="dropdown-menu">
+                    <li><a href="exercises-set-theory.html?subtopic=sets-elements">Sets &amp; Elements</a></li>
+                    <li><a href="exercises-set-theory.html?subtopic=subsets">Subsets</a></li>
+                    <li><a href="exercises-set-theory.html?subtopic=union-intersection">Union &amp; Intersection</a></li>
+                    <li><a href="exercises-set-theory.html?subtopic=venn-complement">Venn Diagrams &amp; Complement</a></li>
+                </ul>
+            </li>
         </ul>
     </nav>
 
@@ -29,37 +65,99 @@
         <div class="container">
             <div class="dashboard-hero">
                 <h2>Choose a Topic to Practise</h2>
-                <p>Each set has 100 questions with instant feedback. Work through them at your own pace — one question at a time.</p>
+                <p>Pick a subtopic for a focused session, or do the whole topic at once.</p>
             </div>
 
-            <div class="topics-grid">
-                <div class="topic-card">
-                    <div class="icon">🔢</div>
-                    <h3>Numbers</h3>
-                    <p>Natural numbers, integers, fractions, decimals, BODMAS, primes, HCF &amp; LCM.</p>
-                    <a href="exercises-numbers.html">Start Numbers →</a>
+            <div class="topic-accordion">
+
+                <!-- Numbers -->
+                <div class="topic-section" style="--ts-accent:#ff6b6b; --ts-accent-subtle:#fff5f5;">
+                    <details>
+                        <summary>
+                            <span class="ts-icon">🔢</span>
+                            <span class="ts-info">
+                                <div class="ts-title">Numbers</div>
+                                <div class="ts-desc">Integers, fractions, decimals, BODMAS, primes, HCF &amp; LCM</div>
+                            </span>
+                            <span class="ts-chevron">▶</span>
+                        </summary>
+                        <div class="subtopic-list">
+                            <a class="subtopic-link" href="exercises-numbers.html?subtopic=natural-numbers-integers">Integers &amp; Natural Numbers <span class="sl-arrow">→</span></a>
+                            <a class="subtopic-link" href="exercises-numbers.html?subtopic=number-line">The Number Line <span class="sl-arrow">→</span></a>
+                            <a class="subtopic-link" href="exercises-numbers.html?subtopic=fractions-decimals">Fractions &amp; Decimals <span class="sl-arrow">→</span></a>
+                            <a class="subtopic-link" href="exercises-numbers.html?subtopic=bodmas">Order of Operations (BODMAS) <span class="sl-arrow">→</span></a>
+                            <a class="subtopic-link" href="exercises-numbers.html?subtopic=primes-factors">Primes, HCF &amp; LCM <span class="sl-arrow">→</span></a>
+                            <a class="subtopic-link" href="exercises-numbers.html?subtopic=real-world">Real-World Problems <span class="sl-arrow">→</span></a>
+                            <a class="subtopic-link subtopic-all" href="exercises-numbers.html">All Numbers questions (101) <span class="sl-arrow">→</span></a>
+                        </div>
+                    </details>
                 </div>
 
-                <div class="topic-card">
-                    <div class="icon">📐</div>
-                    <h3>Algebra</h3>
-                    <p>Sequences, nth term, tables of values, simplifying expressions, linear equations.</p>
-                    <a href="exercises-algebra.html">Start Algebra →</a>
+                <!-- Algebra -->
+                <div class="topic-section" style="--ts-accent:#f093fb; --ts-accent-subtle:#fdf4ff;">
+                    <details>
+                        <summary>
+                            <span class="ts-icon">📐</span>
+                            <span class="ts-info">
+                                <div class="ts-title">Algebra</div>
+                                <div class="ts-desc">Sequences, nth term, tables of values, simplifying, linear equations</div>
+                            </span>
+                            <span class="ts-chevron">▶</span>
+                        </summary>
+                        <div class="subtopic-list">
+                            <a class="subtopic-link" href="exercises-algebra.html?subtopic=sequences-patterns">Sequences &amp; Patterns <span class="sl-arrow">→</span></a>
+                            <a class="subtopic-link" href="exercises-algebra.html?subtopic=sequences-nth-term">The nth Term <span class="sl-arrow">→</span></a>
+                            <a class="subtopic-link" href="exercises-algebra.html?subtopic=tables-of-values">Tables of Values <span class="sl-arrow">→</span></a>
+                            <a class="subtopic-link" href="exercises-algebra.html?subtopic=simplifying">Simplifying Expressions <span class="sl-arrow">→</span></a>
+                            <a class="subtopic-link" href="exercises-algebra.html?subtopic=linear-equations">Linear Equations <span class="sl-arrow">→</span></a>
+                            <a class="subtopic-link subtopic-all" href="exercises-algebra.html">All Algebra questions (100) <span class="sl-arrow">→</span></a>
+                        </div>
+                    </details>
                 </div>
 
-                <div class="topic-card">
-                    <div class="icon">🎨</div>
-                    <h3>Geometry</h3>
-                    <p>3D shapes, nets, 2D shapes, triangle construction, perimeter, area and volume.</p>
-                    <a href="exercises-geometry.html">Start Geometry →</a>
+                <!-- Geometry -->
+                <div class="topic-section" style="--ts-accent:#4facfe; --ts-accent-subtle:#f0f8ff;">
+                    <details>
+                        <summary>
+                            <span class="ts-icon">🎨</span>
+                            <span class="ts-info">
+                                <div class="ts-title">Geometry</div>
+                                <div class="ts-desc">3D shapes, nets, 2D shapes, triangle construction, measurement</div>
+                            </span>
+                            <span class="ts-chevron">▶</span>
+                        </summary>
+                        <div class="subtopic-list">
+                            <a class="subtopic-link" href="exercises-geometry.html?subtopic=3d-shapes">3D Shapes <span class="sl-arrow">→</span></a>
+                            <a class="subtopic-link" href="exercises-geometry.html?subtopic=nets">Nets of Solids <span class="sl-arrow">→</span></a>
+                            <a class="subtopic-link" href="exercises-geometry.html?subtopic=2d-shapes">2D Shapes <span class="sl-arrow">→</span></a>
+                            <a class="subtopic-link" href="exercises-geometry.html?subtopic=construction">Triangle Construction <span class="sl-arrow">→</span></a>
+                            <a class="subtopic-link" href="exercises-geometry.html?subtopic=measurement">Measurement <span class="sl-arrow">→</span></a>
+                            <a class="subtopic-link subtopic-all" href="exercises-geometry.html">All Geometry questions (100) <span class="sl-arrow">→</span></a>
+                        </div>
+                    </details>
                 </div>
 
-                <div class="topic-card">
-                    <div class="icon">⚡</div>
-                    <h3>Set Theory</h3>
-                    <p>Sets, membership, union, intersection, complement and Venn diagrams.</p>
-                    <a href="exercises-set-theory.html">Start Set Theory →</a>
+                <!-- Set Theory -->
+                <div class="topic-section" style="--ts-accent:#43e97b; --ts-accent-subtle:#f0fff6;">
+                    <details>
+                        <summary>
+                            <span class="ts-icon">⚡</span>
+                            <span class="ts-info">
+                                <div class="ts-title">Set Theory</div>
+                                <div class="ts-desc">Sets, membership, union, intersection, complement, Venn diagrams</div>
+                            </span>
+                            <span class="ts-chevron">▶</span>
+                        </summary>
+                        <div class="subtopic-list">
+                            <a class="subtopic-link" href="exercises-set-theory.html?subtopic=sets-elements">Sets &amp; Elements <span class="sl-arrow">→</span></a>
+                            <a class="subtopic-link" href="exercises-set-theory.html?subtopic=subsets">Subsets <span class="sl-arrow">→</span></a>
+                            <a class="subtopic-link" href="exercises-set-theory.html?subtopic=union-intersection">Union &amp; Intersection <span class="sl-arrow">→</span></a>
+                            <a class="subtopic-link" href="exercises-set-theory.html?subtopic=venn-complement">Venn Diagrams &amp; Complement <span class="sl-arrow">→</span></a>
+                            <a class="subtopic-link subtopic-all" href="exercises-set-theory.html">All Set Theory questions (100) <span class="sl-arrow">→</span></a>
+                        </div>
+                    </details>
                 </div>
+
             </div>
         </div>
     </main>
@@ -72,6 +170,11 @@
     <script>
     document.getElementById('nav-toggle').addEventListener('click', function() {
         this.nextElementSibling.classList.toggle('nav-open');
+    });
+    document.querySelectorAll('.dropdown-toggle').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            this.closest('.nav-dropdown').classList.toggle('dropdown-open');
+        });
     });
     </script>
 </body>
