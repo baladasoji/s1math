@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Numbers Exercises - S1 Mathematics</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>:root { --accent: #ff6b6b; --accent-subtle: #fff5f5; --accent-subtle-2: #ffe8e8; --accent-border-light: #ff9999; --accent-bg: #f9f9f9; }</style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>🔢 Numbers — Exercises</h1>
+            <p>Natural Numbers &amp; Integers, Number Line, Fractions, Operations, Primes &amp; Divisibility · 100 questions across 6 parts</p>
+        </div>
+    </header>
+
+    <nav>
+        <button class="nav-hamburger" aria-label="Toggle menu" id="nav-toggle">&#9776;</button>
+        <ul>
+            <li><a href="../content/index.html">← Back to Content</a></li>
+            <li><a href="exercises-numbers.html">🔢 Numbers</a></li>
+            <li><a href="exercises-algebra.html">📐 Algebra</a></li>
+            <li><a href="exercises-geometry.html">🎨 Geometry</a></li>
+            <li><a href="exercises-set-theory.html">⚡ Set Theory</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <div class="container">
+            <div class="ws-progress-header">
+                <span class="ws-q-counter" id="ws-counter">Q 1 of 100</span>
+                <div class="ws-progress-track">
+                    <div class="ws-progress-fill" id="ws-progress"></div>
+                </div>
+            </div>
+
+            <div id="ws-card" class="ws-card-placeholder"></div>
+
+            <div class="ws-nav-bar">
+                <button class="ws-btn ws-btn-prev" id="ws-prev" onclick="goPrev()">← Prev</button>
+                <span class="ws-score-display" id="ws-score">0 / 0 correct</span>
+                <button class="ws-btn ws-btn-next" id="ws-next" onclick="goNext()" disabled>Next →</button>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 S1 Mathematics Curriculum. All rights reserved.</p>
+        <p>Designed for educational purposes.</p>
+    </footer>
+    <script src="js/worksheet-engine.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', () => loadAndInit('numbers'));
+    document.getElementById('nav-toggle').addEventListener('click', function() {
+        this.nextElementSibling.classList.toggle('nav-open');
+    });
+    document.querySelectorAll('nav a').forEach(link => {
+        if (link.getAttribute('href') === window.location.pathname.split('/').pop())
+            link.classList.add('active');
+    });
+    </script>
+</body>
+</html>

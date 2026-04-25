@@ -1,0 +1,18 @@
+version = 0.1
+
+[default.global.parameters]
+stack_name = "EuropeanMath"
+region     = "eu-north-1"
+confirm_changeset = true
+capabilities = "CAPABILITY_IAM"
+
+[default.build.parameters]
+cached = true
+parallel = true
+
+[default.deploy.parameters]
+s3_bucket       = ""   # fill in after first deploy: sam deploy --guided
+s3_prefix       = "EuropeanMath"
+resolve_s3      = true
+disable_rollback = true
+image_repositories = []

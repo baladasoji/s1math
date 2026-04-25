@@ -1,0 +1,93 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: "S1 Mathematics \u2014 Questions API (DynamoDB + Lambda + HTTP API Gateway)"
+Globals:
+  Function:
+    Runtime: python3.13
+    Timeout: 10
+    Environment:
+      Variables:
+        TABLE_NAME:
+          Ref: QuestionsTable
+Resources:
+  QuestionsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: s1math-questions
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+      - AttributeName: topic
+        AttributeType: S
+      - AttributeName: questionId
+        AttributeType: S
+      - AttributeName: grade
+        AttributeType: S
+      - AttributeName: subtopic
+        AttributeType: S
+      - AttributeName: difficulty
+        AttributeType: S
+      KeySchema:
+      - AttributeName: topic
+        KeyType: HASH
+      - AttributeName: questionId
+        KeyType: RANGE
+      GlobalSecondaryIndexes:
+      - IndexName: grade-topic-index
+        KeySchema:
+        - AttributeName: grade
+          KeyType: HASH
+        - AttributeName: topic
+          KeyType: RANGE
+        Projection:
+          ProjectionType: ALL
+      - IndexName: subtopic-difficulty-index
+        KeySchema:
+        - AttributeName: subtopic
+          KeyType: HASH
+        - AttributeName: difficulty
+          KeyType: RANGE
+        Projection:
+          ProjectionType: ALL
+  GetQuestionsFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: s1math-get-questions
+      CodeUri: GetQuestionsFunction
+      Handler: handler.lambda_handler
+      Policies:
+      - DynamoDBReadPolicy:
+          TableName:
+            Ref: QuestionsTable
+      Events:
+        GetQuestions:
+          Type: HttpApi
+          Properties:
+            ApiId:
+              Ref: QuestionsApi
+            Path: /questions/{topic}
+            Method: GET
+    Metadata:
+      SamResourceId: GetQuestionsFunction
+  QuestionsApi:
+    Type: AWS::Serverless::HttpApi
+    Properties:
+      StageName: prod
+      CorsConfiguration:
+        AllowOrigins:
+        - '*'
+        AllowMethods:
+        - GET
+        - OPTIONS
+        AllowHeaders:
+        - Content-Type
+        - Authorization
+        MaxAge: 86400
+Outputs:
+  ApiEndpoint:
+    Description: API Gateway endpoint URL
+    Value:
+      Fn::Sub: https://${QuestionsApi}.execute-api.${AWS::Region}.amazonaws.com/prod
+  TableName:
+    Description: DynamoDB table name
+    Value:
+      Ref: QuestionsTable
