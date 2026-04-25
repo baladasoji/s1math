@@ -786,7 +786,7 @@ code {
 .ws-submit-btn:disabled { opacity: 0.45; cursor: default; }
 
 .ws-feedback {
-    display: none; margin-top: 0.75rem; padding: 0.7rem 1rem;
+    display: block; margin-top: 0.75rem; padding: 0.7rem 1rem;
     border-radius: 6px; font-size: 0.88rem; line-height: 1.5;
 }
 .ws-feedback-correct { background: #e8fff2; color: #1a7a40; border-left: 3px solid #43e97b; }
@@ -890,7 +890,12 @@ code {
     }
 
     header h1 {
-        font-size: 1.8rem;
+        font-size: 1.1rem;
+    }
+
+    .nav-hamburger {
+        padding: 0.6rem 1rem;
+        font-size: 1.3rem;
     }
 
     .dashboard-hero h2 {
@@ -914,6 +919,15 @@ code {
     .ws-nav-bar {
         padding: 0.75rem 1rem;
     }
+
+    /* ── Exercise card mobile improvements ── */
+
+    /* Compact page header */
+    header { padding: 0.75rem 0; }
+    header p { font-size: 0.82rem; }
+
+    /* Shrink main vertical padding — 3rem default is too much on mobile */
+    main { padding: 0.5rem 0 80px; }
 }
 
 /* ===== CARD-FLIP EXERCISE UI ===== */
@@ -1123,3 +1137,38 @@ code {
 
 .ws-correct .ws-option-key { background: #43e97b; color: #fff; }
 .ws-wrong   .ws-option-key { background: #ff6b6b; color: #fff; }
+
+/* ===== MOBILE CARD OVERRIDES (must follow base card styles) ===== */
+@media (max-width: 768px) {
+    /* Tighten progress header */
+    .ws-progress-header { padding: 0.5rem 0 0.35rem; margin-bottom: 0.6rem; }
+
+    /* Reduce card padding on narrow phones */
+    .ws-card { padding: 1rem 0.9rem; min-height: unset; }
+
+    /* MCQ options: full-width rows with proper touch targets */
+    .ws-option {
+        width: 100%;
+        min-height: 48px;
+        display: flex;
+        align-items: center;
+    }
+
+    /* Fill input: fluid width, stacked layout */
+    .ws-fill-wrap { flex-direction: column; align-items: stretch; }
+    .ws-input { width: 100%; }
+    .ws-submit-btn { width: 100%; min-height: 48px; }
+
+    /* Larger touch targets for Prev/Next buttons */
+    .ws-btn { min-height: 48px; padding: 0.75rem 1.2rem; }
+
+    /* Tighten bottom nav bar spacing */
+    .ws-nav-bar { padding: 0.6rem 0 0.75rem; margin-top: 0.75rem; }
+
+    /* Summary screen: reduce padding on small screens */
+    .ws-summary { padding: 1.25rem 0.75rem; }
+    .ws-summary h3 { font-size: 1.3rem; }
+
+    /* Part label: less bottom margin */
+    .ws-part-label { margin-bottom: 0.6rem; }
+}

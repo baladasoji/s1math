@@ -184,6 +184,7 @@ function selectMCQ(questionId, selectedKey) {
     wsState.answers[questionId]     = selectedKey === q.correctKey;
     wsState.selectedMCQ[questionId] = selectedKey;
     renderCard(wsState.index);
+    scrollToFeedback();
 }
 
 function submitFill(questionId) {
@@ -196,6 +197,17 @@ function submitFill(questionId) {
     wsState.answers[questionId]    = q.acceptedAnswers.some(a => a.toLowerCase().replace(/\s+/g, '') === norm);
     wsState.fillInputs[questionId] = raw;
     renderCard(wsState.index);
+    scrollToFeedback();
+}
+
+function scrollToFeedback() {
+    const fb = document.querySelector('.ws-feedback');
+    if (!fb) return;
+    const navBar = document.querySelector('.ws-nav-bar');
+    const navHeight = navBar ? navBar.offsetHeight : 0;
+    const fbBottom = fb.getBoundingClientRect().bottom;
+    const overflow = fbBottom - (window.innerHeight - navHeight - 8);
+    if (overflow > 0) window.scrollBy({ top: overflow, behavior: 'smooth' });
 }
 
 // ── Summary screen ───────────────────────────────────────────────────────────
